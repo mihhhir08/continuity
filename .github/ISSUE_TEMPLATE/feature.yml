@@ -1,0 +1,34 @@
+name: Feature
+description: Propose milestone-scoped product work
+title: "[Feature] "
+labels:
+  - feature
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the user-visible outcome, not only the implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: requirement
+    attributes:
+      label: PRD requirement
+      description: Link the relevant PRD section and roadmap milestone.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable conditions that prove completion.
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Security and privacy impact
+      description: Identify changes to trust boundaries, permissions, or data.
+    validations:
+      required: true
