@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: continuity
+      POSTGRES_USER: continuity
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    volumes:
+      - continuity-db:/var/lib/postgresql/data
+      - ../platform/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U continuity"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  control-plane:
+    build: ../platform
+    read_only: true
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgres://continuity:${POSTGRES_PASSWORD}@postgres:5432/continuity
+      CONTINUITY_API_KEY_SHA256: ${CONTINUITY_API_KEY_SHA256:?set CONTINUITY_API_KEY_SHA256}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  continuity-db:

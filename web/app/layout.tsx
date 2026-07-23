@@ -6,6 +6,10 @@ const sans = Geist({ variable: "--font-sans", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      "https://continuity-change-infrastructure.mihhhir08.chatgpt.site",
+  ),
   title: {
     default: "Continuity — Software that survives change",
     template: "%s — Continuity",

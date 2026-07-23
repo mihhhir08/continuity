@@ -73,3 +73,15 @@ deployment.
 Continuity is a monorepo. The marketing site and future console live in `web/`;
 the shared local engine and adapters live in their own top-level workspaces.
 One Sites project serves the web application.
+
+### D-014 — Hosted foundation
+
+The first control plane is one PostgreSQL-backed TypeScript service. It uses
+organization scoping, mandatory idempotency keys, an in-database durable queue,
+and append-only usage events. Separate microservices require measured need.
+
+### D-015 — Production truth
+
+External identity, billing, signing, storage, domain, and scheduling resources
+are manual production configuration. The product must fail truthfully when
+they are absent and must never commit their credentials.

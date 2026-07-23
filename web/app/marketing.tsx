@@ -110,7 +110,7 @@ export function MarketingPage() {
         <a className="brand" href="/"><span>C</span>Continuity</a>
         <nav aria-label="Main navigation">
           <a href="#product">Product</a><a href="#developers">Developers</a><a href="#providers">Providers</a>
-          <a href="/enterprise">Enterprise</a><a href="/research">Research</a><a href="/pricing">Pricing</a><a href="/docs">Docs</a>
+          <a href="/enterprise">Enterprise</a><a href="/research">Research</a><a href="/pricing">Pricing</a><a href="/docs">Docs</a><a href="/console">Console</a>
         </nav>
         <a className="nav-cta" href="#quickstart">Start free</a>
       </header>

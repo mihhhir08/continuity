@@ -1,4 +1,6 @@
 /target/
+**/node_modules/
+**/.env
 **/.continuity/signing.key
 **/.continuity/attestation.json
 *.log

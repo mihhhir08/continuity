@@ -56,6 +56,33 @@ The demonstration copies fixtures to a temporary directory, so it never
 modifies tracked examples. Private signing keys and generated attestations are
 ignored by Git.
 
+## Hosted control plane
+
+The PostgreSQL-backed API is in `platform/`; customer-controlled deployment is
+in `deploy/`.
+
+```bash
+cd platform
+npm ci
+npm test
+docker compose -f ../deploy/docker-compose.yml up --build
+```
+
+Required production values are documented in `platform/.env.example` and the
+Compose file. Never commit them. Remaining external setup: Cal.com, billing
+products, production identity, managed data services, signing identity,
+domain/DNS, and design-partner access.
+
+Founder actions and the Vercel diagnosis are in `LAUNCH_CHECKLIST.md`.
+
+ChangeBench currently claims only the implemented endpoint-rename case:
+
+```bash
+bash changebench/run.sh
+```
+
+Cases marked `specified` in `changebench/cases.json` are not benchmark results.
+
 ## Repository publication
 
 Target:

@@ -1,0 +1,10 @@
+[
+  {"id":"openapi-removed-endpoint","category":"contract","status":"implemented","fixture":"fixtures/openapi-change.json"},
+  {"id":"renamed-field","category":"contract","status":"specified"},
+  {"id":"type-narrowing","category":"type","status":"specified"},
+  {"id":"authentication-scheme","category":"authentication","status":"specified"},
+  {"id":"pagination-semantics","category":"behavior","status":"specified"},
+  {"id":"malicious-capsule","category":"adversarial","status":"specified"},
+  {"id":"prohibited-egress","category":"privacy","status":"specified"},
+  {"id":"interrupted-job","category":"reliability","status":"specified"}
+]
