@@ -4,7 +4,7 @@ Last updated: 2026-07-23
 
 ## Active milestone
 
-Milestone 1 — Repository foundation.
+Milestone 2 — Marketing site.
 
 ## Completed
 
@@ -16,24 +16,21 @@ Milestone 1 — Repository foundation.
 - Repository foundation files drafted.
 - Documentation terminology, internal links, pricing constraints, and secret
   hygiene validated.
-
-## In progress
-
-- Commit the foundation locally.
+- Initial commit `4a7d76f` created and pushed to `main`.
+- Private repository `mihhhir08/continuity` created.
+- Eight implementation issues created with milestone acceptance criteria.
 
 ## Blocker
 
-GitHub CLI is installed, but the saved authentication for `mihhhir08` is
-invalid. Re-authentication is required before creating and pushing the private
-repository.
+None.
 
 ## Next task
 
-1. Commit `Document Continuity product foundation`.
-2. Run `gh auth login -h github.com`.
-3. Create `mihhhir08/continuity` as a private repository.
-4. Push `main`.
-5. Create the eight implementation issues listed in `HANDOFF.md`.
+1. Create `codex/marketing-site` from current `main`.
+2. Read `LANDING_PAGE.md` and Milestone 2 in `ROADMAP.md`.
+3. Initialize the Sites project exactly once.
+4. Implement and validate the multi-route marketing site.
+5. Update this file and `HANDOFF.md`, then open a draft pull request.
 
 ## Verification record
 
@@ -46,5 +43,7 @@ Validated on 2026-07-23:
 - Secret-pattern scan found no credential material.
 - The four product surfaces and CI integration distinction agree across the
   PRD, roadmap, decision log, and agent instructions.
+- GitHub reports the repository as private with `main` as its default branch.
+- All eight approved implementation issues exist.
 
 No product code exists yet.

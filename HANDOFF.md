@@ -14,22 +14,15 @@ Do not start a later milestone while the active milestone remains incomplete.
 
 ## Current state
 
-The repository contains the documentation foundation only. No product code,
-site project, hosted resources, billing account, or Cal.com event has been
-created.
+The private repository is published at
+`https://github.com/mihhhir08/continuity`. The documentation foundation and all
+eight implementation issues are present. No product code, site project, hosted
+resources, billing account, or Cal.com event has been created.
 
 ## Current blocker
 
-GitHub CLI authentication for the configured account is invalid. Restore it
-interactively:
-
-```bash
-gh auth login -h github.com
-gh auth status
-```
-
-Do not store the resulting token in repository files, shell scripts, logs, or
-documentation.
+None. GitHub CLI authentication is active for `mihhhir08`. Never copy its token
+into repository files, shell scripts, logs, or documentation.
 
 ## Repository publication
 
@@ -44,19 +37,19 @@ main
 Initial commit:
 
 ```text
-Document Continuity product foundation
+4a7d76f Document Continuity product foundation
 ```
 
-After the initial push, create these eight implementation issues:
+Created implementation issues:
 
-1. Landing page and Cal.com integration.
-2. Rust engine and CLI.
-3. Local MCP server.
-4. Change simulation demonstration.
-5. Hosted API and console.
-6. ChangeBench evaluation suite.
-7. Provider Migration Capsules.
-8. Private deployment and enterprise controls.
+1. `#1` Landing page and Cal.com integration.
+2. `#2` Rust engine and CLI.
+3. `#3` Local MCP server.
+4. `#4` Change simulation demonstration.
+5. `#5` Hosted API and console.
+6. `#6` ChangeBench evaluation suite.
+7. `#7` Provider Migration Capsules.
+8. `#8` Private deployment and enterprise controls.
 
 ## Session closeout
 
