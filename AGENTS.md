@@ -55,3 +55,13 @@ touches those areas.
   a branch or pull request.
 - Feature branches and pull requests are exceptions, not the default.
 - Use terse, intentional commits.
+
+## Brand and public-release gate
+
+- `ChangeTwin` is the preferred future name, but the current identity remains
+  `Continuity` until `BRAND_GATE.md` says `Status: cleared`.
+- Do not rename interfaces, repositories, packages, deployments, or domains
+  before that gate.
+- Never change this private repository to public.
+- The future public repository must be created from the explicit allowlist in
+  `scripts/export-open-core.sh` with fresh Git history.

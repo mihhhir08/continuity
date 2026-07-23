@@ -99,3 +99,19 @@ distinctive product presentation.
 Completed changes are committed and pushed to `main` unless the user explicitly
 requests a branch or pull request. Feature branches and draft pull requests are
 no longer the default delivery workflow.
+
+### D-018 — Conditional ChangeTwin rebrand
+
+`ChangeTwin` is the preferred replacement name. The rename is blocked until the
+domain is purchased and trademark review is complete. After clearance, the
+CLI, MCP URIs, local state, packages, evidence identity, deployment, and
+documentation are renamed together without compatibility aliases because no
+public release exists yet.
+
+### D-019 — Public open-core boundary
+
+The full monorepo and its history remain private. A new MIT-licensed repository
+with fresh history will contain only the Rust engine, CLI, local MCP, public
+formats, sanitized fixtures, public ChangeBench cases, demonstration, and
+trust documentation. Strategy, web, console, hosted control plane, network
+intelligence, and operational material remain private.

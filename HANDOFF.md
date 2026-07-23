@@ -133,3 +133,7 @@ Before ending any session:
 - No fabricated customers, benchmarks, certifications, or testimonials.
 - No public source release until the open/private boundary and license are
   explicitly reviewed.
+- Do not perform the ChangeTwin rename until every checkbox in
+  `BRAND_GATE.md` is complete and its status is `cleared`.
+- Never make the private monorepo public; create the public repository from the
+  allowlist exporter with fresh history.

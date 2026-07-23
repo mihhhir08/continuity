@@ -40,7 +40,9 @@ Production configuration and design-partner onboarding.
 ## Blocker
 
 External production accounts and values are intentionally not stored in Git.
-The manual configuration list is recorded below and in `HANDOFF.md`.
+The ChangeTwin rename and public open-core launch are additionally blocked on
+domain purchase and trademark clearance. The manual configuration list is
+recorded below, in `BRAND_GATE.md`, and in `HANDOFF.md`.
 
 ## Next task
 
@@ -84,3 +86,16 @@ Validated on 2026-07-23:
 - Root README rebuilt as the polished product and engineering front door with
   truthful status, architecture, quick starts, trust boundaries, and durable
   documentation links.
+- Bright editorial marketing system implemented across the homepage and all
+  supporting routes with an interactive illustrative Compatibility Graph,
+  accessible navigation and tabs, accurate CLI examples, discovery metadata,
+  security headers, and an original social card.
+- Conditional ChangeTwin brand gate and allowlist-only fresh-history public
+  exporter implemented. The rename and public launch remain blocked until
+  domain purchase and trademark clearance.
+- `npm run lint`, the Next.js/Vercel production build, the Sites/vinext build,
+  and rendered-route tests pass for the editorial redesign.
+- `cargo fmt --check`, strict Clippy, locked Rust tests, the two-language demo,
+  platform tests, and the implemented ChangeBench case pass.
+- The open-core exporter passes shell validation and correctly refuses to
+  export while the brand gate is pending.

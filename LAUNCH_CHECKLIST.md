@@ -7,15 +7,30 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 
 ### Vercel
 
-1. Merge the stacked pull requests in order: `#9`, then `#10`, then `#11`.
-2. Set the Vercel project's **Root Directory** to `web`.
-3. Leave **Output Directory** empty.
-4. Use Node.js 22 and redeploy merged `main`.
-5. Confirm the build command is `npm run build:vercel`.
-6. Set `NEXT_PUBLIC_SITE_URL` to the final production origin.
+1. Keep the Vercel project's **Root Directory** set to `web`.
+2. Leave **Output Directory** empty.
+3. Use Node.js 22 and deploy `main`.
+4. Confirm the build command is `npm run build:vercel`.
+5. Set `NEXT_PUBLIC_SITE_URL` to the final production origin.
 
-Until those pull requests are merged, deploy `codex/hosted-platform` for a
-preview. Current `main` contains documentation but not the web application.
+### Brand gate
+
+1. Purchase `changetwin.com`.
+2. Complete US trademark screening and legal review.
+3. Recheck and reserve package names.
+4. Mark `BRAND_GATE.md` cleared.
+5. Perform the complete interface and repository rename in one change.
+6. Configure DNS only after the renamed deployment is validated.
+
+### Public open core
+
+1. Never change the private monorepo visibility.
+2. Run the allowlist exporter only after brand clearance and the clean rename.
+3. Create `mihhhir08/changetwin` as a new private repository with fresh history.
+4. Run its pinned CI, secret scan, dependency review, and documentation audit.
+5. Enable private vulnerability reporting, Dependabot, CodeQL, secret scanning,
+   and push protection.
+6. Obtain explicit founder approval before making it public.
 
 ### Scheduling
 
@@ -64,13 +79,13 @@ preview. Current `main` contains documentation but not the web application.
 
 ## Yet to be fixed or implemented
 
-- Merge the three draft pull requests.
 - Complete production tenant-isolation policies and adversarial tests.
 - Connect identity, billing, storage, signing, monitoring, and backups.
 - Complete capsule publishing, issuer trust, revocation, and signed WASM.
 - Implement remaining ChangeBench cases; only endpoint rename is measured.
 - Add Java, Go, GraphQL, and gRPC after the initial workflow is proven.
 - Complete legal terms, privacy, support, incident response, and license review.
+- Clear the ChangeTwin brand and public-release gates.
 - Obtain real usage, customer outcomes, benchmarks, and security assessment
   before publishing those claims.
 

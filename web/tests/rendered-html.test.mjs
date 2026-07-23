@@ -18,8 +18,12 @@ test("renders the product truthfully", async () => {
   const html = await response.text();
   assert.match(html, /Software that/);
   assert.match(html, /survives change/);
-  assert.match(html, /Synthetic simulation/);
+  assert.match(html, /Illustrative simulation/);
+  assert.match(html, /Compatibility Graph/);
   assert.match(html, /Book a Call/);
+  assert.match(html, /continuity repair --change openapi-v2\.json --apply --approve/);
+  assert.doesNotMatch(html, /continuity repair --dry-run/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
   assert.doesNotMatch(html, /Enterprise[^<]{0,40}\$[0-9]/i);
 });
@@ -30,4 +34,14 @@ test("renders supporting routes", async () => {
     assert.equal(response.status, 200, path);
     assert.match(await response.text(), /Continuity/);
   }
+});
+
+test("publishes discovery metadata without exposing the console", async () => {
+  const sitemap = await render("/sitemap.xml");
+  assert.equal(sitemap.status, 200);
+  assert.match(await sitemap.text(), /\/security/);
+
+  const robots = await render("/robots.txt");
+  assert.equal(robots.status, 200);
+  assert.match(await robots.text(), /Disallow: \/console/);
 });

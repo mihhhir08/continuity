@@ -1,43 +1,54 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Mono, Instrument_Sans } from "next/font/google";
+import { brand } from "./brand";
 import "./globals.css";
 
-const sans = Geist({ variable: "--font-sans", subsets: ["latin"] });
-const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
+const sans = Instrument_Sans({ variable: "--font-sans", subsets: ["latin"] });
+const mono = DM_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ??
-      "https://continuity-change-infrastructure.mihhhir08.chatgpt.site",
-  ),
+  metadataBase: new URL(brand.siteUrl),
   title: {
-    default: "Continuity — Software that survives change",
-    template: "%s — Continuity",
+    default: `${brand.name} — ${brand.tagline}`,
+    template: `%s — ${brand.name}`,
   },
-  description:
-    "Predict what software changes will break, repair affected systems locally, and prove they are safe before release.",
+  description: brand.description,
+  applicationName: brand.name,
+  alternates: { canonical: "/" },
   icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "Continuity — Software that survives change",
-    description:
-      "Agent-native infrastructure for predicting, repairing, and verifying software change.",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    type: "website",
+    siteName: brand.name,
+    title: `${brand.name} — ${brand.tagline}`,
+    description: brand.description,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${brand.name} — ${brand.tagline}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Continuity — Software that survives change",
-    description:
-      "Agent-native infrastructure for predicting, repairing, and verifying software change.",
+    title: `${brand.name} — ${brand.tagline}`,
+    description: brand.description,
     images: ["/og.png"],
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: brand.name,
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Linux, macOS, Windows",
+  description: brand.description,
+  url: brand.siteUrl,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${sans.variable} ${mono.variable}`}>{children}</body>
+      <body className={`${sans.variable} ${mono.variable}`}>
+        {children}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
+      </body>
     </html>
   );
 }

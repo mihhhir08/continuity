@@ -13,16 +13,18 @@ assets, brand, or distinctive composition.
 
 ## Visual system
 
-- Ink: `#0B1015`
-- Paper: `#F5F8FC`
-- Primary accent: electric blue `#1268FF`
-- Risk: signal amber `#FFB04A`
-- Verified: mint `#56D99B`
-- Sans type: Geist Sans
-- Code type: Geist Mono
+- Ink: `#0A0D12`
+- Paper: `#F7F9FC`
+- Primary accent: electric blue `#0868F2`
+- Risk: signal amber `#F3A433`
+- Verified: mint `#35C887`
+- Sans type: Instrument Sans
+- Code type: DM Mono
 - Rhythm: oversized editorial type, generous whitespace, numbered sections,
-  and alternating ink, paper, and blue surfaces
+  fine technical grids, bright paper surfaces, and focused blue panels
 - Motif: connected systems transition from amber risk to mint verification
+- Full-width dark sections are prohibited. Dark styling is reserved for
+  contained code, terminal, and modal surfaces.
 
 Motion must be functional, restrained, and disabled by reduced-motion
 preferences.

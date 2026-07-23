@@ -247,8 +247,9 @@ Production identity, billing, storage, signing, and scheduling accounts remain
 external configuration. No customer, benchmark, certification, or performance
 claim is published without evidence.
 
-See [STATUS.md](STATUS.md) for the current work and
-[LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md) for the remaining founder actions.
+See [STATUS.md](STATUS.md) for the current work,
+[LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md) for the remaining founder actions,
+and [BRAND_GATE.md](BRAND_GATE.md) before any rename or public release.
 
 ## Documentation
 
@@ -263,6 +264,7 @@ See [STATUS.md](STATUS.md) for the current work and
 | [Decision log](DECISIONS.md) | Locked product and engineering decisions |
 | [Status](STATUS.md) | Completed work, blockers, and next tasks |
 | [Handoff](HANDOFF.md) | Exact continuation protocol |
+| [Brand gate](BRAND_GATE.md) | Required clearance before renaming or exporting the public core |
 | [Sources](SOURCES.md) | Research and competitive references |
 | [Agent instructions](AGENTS.md) | Binding rules for coding agents |
 
