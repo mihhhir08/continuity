@@ -81,3 +81,6 @@ Validated on 2026-07-23:
   boundaries.
 - Repository delivery policy updated: completed work goes to `main` unless the
   user explicitly requests otherwise.
+- Root README rebuilt as the polished product and engineering front door with
+  truthful status, architecture, quick starts, trust boundaries, and durable
+  documentation links.
