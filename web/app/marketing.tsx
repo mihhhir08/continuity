@@ -105,7 +105,7 @@ function Network() {
 
 export function MarketingPage() {
   return (
-    <main>
+    <main className="marketing">
       <header className="nav">
         <a className="brand" href="/"><span>C</span>Continuity</a>
         <nav aria-label="Main navigation">
@@ -117,6 +117,7 @@ export function MarketingPage() {
 
       <section className="hero shell">
         <div className="hero-copy">
+          <a className="announcement" href="/changelog"><b>NEW</b><span>Counterfactual Change Network</span><i>↗</i></a>
           <span className="eyebrow"><i /> The change infrastructure</span>
           <h1>Software that<br /><em>survives change.</em></h1>
           <p>Continuity predicts what every code and API change will break, repairs affected systems inside their own environments, and proves they are safe before release.</p>
@@ -136,6 +137,7 @@ export function MarketingPage() {
       </section>
 
       <section className="section shell" id="product">
+        <div className="section-index"><span>Product catalog</span><b>[ 01 / 08 ]</b></div>
         <div className="section-head"><span className="eyebrow">One continuity layer</span><h2>Change becomes a controlled system.</h2><p>Every surface shares the same local engine and evidence model.</p></div>
         <div className="product-grid">
           {products.map(([name, description], index) => <article className="product-card" key={name}><span>0{index + 1}</span><div className="mini-mark" /><h3>{name}</h3><p>{description}</p></article>)}
@@ -144,6 +146,7 @@ export function MarketingPage() {
 
       <section className="section flow-section" id="simulation">
         <div className="shell">
+          <div className="section-index"><span>How it works</span><b>[ 02 / 08 ]</b></div>
           <div className="section-head"><span className="eyebrow">Closed-loop change</span><h2>From unknown risk to signed evidence.</h2></div>
           <div className="flow">
             {["Scan", "Simulate", "Repair", "Verify", "Attest"].map((step, index) => <div key={step}><span>0{index + 1}</span><strong>{step}</strong><p>{["Map contracts and usage.", "Replay the proposed change.", "Apply the smallest patch.", "Run your own checks.", "Sign the outcome."][index]}</p></div>)}
@@ -152,6 +155,7 @@ export function MarketingPage() {
       </section>
 
       <section className="section shell quickstart" id="quickstart">
+        <div className="section-index"><span>Interfaces</span><b>[ 03 / 08 ]</b></div>
         <div className="section-head" id="developers"><span className="eyebrow">Developer quick start</span><h2>One command between change and certainty.</h2></div>
         <div className="terminal">
           <div className="terminal-bar"><span /><span /><span /><b>continuity — local</b></div>
@@ -162,12 +166,13 @@ export function MarketingPage() {
 
       <section className="section benchmark">
         <div className="shell benchmark-grid">
-          <div><span className="eyebrow">ChangeBench</span><h2>Proof that can be reproduced.</h2><p>Our evaluation suite covers contract, type, authentication, and behavioral changes. Results appear only after fixtures, commands, and raw outputs are published.</p><a className="text-link" href="/research">Read the methodology →</a></div>
+          <div className="benchmark-copy"><div className="section-index"><span>Research</span><b>[ 04 / 08 ]</b></div><span className="eyebrow">ChangeBench</span><h2>Proof that can be reproduced.</h2><p>Our evaluation suite covers contract, type, authentication, and behavioral changes. Results appear only after fixtures, commands, and raw outputs are published.</p><a className="text-link" href="/research">Read the methodology →</a></div>
           <div className="pending-panel"><span>PUBLIC RESULT STATUS</span><strong>Measurement in progress</strong><p>No invented score. No cherry-picked comparison. The benchmark ships with the engine.</p><div><i /> fixtures defined</div><div><i /> methodology public</div><div className="muted"><i /> results pending release</div></div>
         </div>
       </section>
 
       <section className="section shell" id="providers">
+        <div className="section-index"><span>Use cases</span><b>[ 05 / 08 ]</b></div>
         <div className="section-head"><span className="eyebrow">Counterfactual Change Network</span><h2>Providers test tomorrow’s change against today’s integrations.</h2><p>Consumers execute locally. Providers receive only approved compatibility outcomes.</p></div>
         <div className="audience-grid">
           {[
@@ -180,12 +185,13 @@ export function MarketingPage() {
       </section>
 
       <section className="section deployment">
-        <div className="shell"><div className="section-head"><span className="eyebrow">Deploy where the code lives</span><h2>One protocol. Four boundaries.</h2></div>
+        <div className="shell"><div className="section-index"><span>Deployment</span><b>[ 06 / 08 ]</b></div><div className="section-head"><span className="eyebrow">Deploy where the code lives</span><h2>One protocol. Four boundaries.</h2></div>
           <div className="deployment-row">{["Local", "Hosted", "Private cloud", "Disconnected"].map((item, i) => <div key={item}><span>0{i + 1}</span><strong>{item}</strong><i className={i === 0 || i === 3 ? "mint" : "cyan"} /></div>)}</div>
         </div>
       </section>
 
       <section className="section shell pricing" id="pricing">
+        <div className="section-index"><span>Pricing</span><b>[ 07 / 08 ]</b></div>
         <div className="section-head"><span className="eyebrow">Simple entry. Infrastructure depth.</span><h2>Start locally. Scale when the network matters.</h2></div>
         <div className="pricing-grid">
           {plans.map(([name, price, blurb, a, b]) => <article key={name}><span>{name}</span><div className="price">{price}<small>{price !== "$0" && "/month"}</small></div><p>{blurb}</p><ul><li>{a}</li><li>{b}</li><li>Local CLI + MCP</li></ul><a className="button ghost" href="#quickstart">Start free</a></article>)}
@@ -194,6 +200,7 @@ export function MarketingPage() {
       </section>
 
       <section className="section shell faq">
+        <div className="section-index"><span>Questions</span><b>[ 08 / 08 ]</b></div>
         <div className="section-head"><span className="eyebrow">FAQ</span><h2>The trust boundary, plainly.</h2></div>
         {faq.map(([q, a]) => <details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}
       </section>

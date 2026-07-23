@@ -51,7 +51,7 @@ touches those areas.
 
 ## Git protocol
 
-- Initial documentation foundation is committed to `main`.
-- Later work uses `codex/<milestone>` branches.
+- Commit and push completed work to `main` unless the user explicitly requests
+  a branch or pull request.
+- Feature branches and pull requests are exceptions, not the default.
 - Use terse, intentional commits.
-- Draft pull requests are the default for implementation milestones.

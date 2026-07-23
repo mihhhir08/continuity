@@ -121,6 +121,8 @@ Before ending any session:
 5. record failed checks and blockers truthfully;
 6. commit only scoped work;
 7. never commit credentials or generated secret files.
+8. commit and push completed work to `main` unless the user explicitly requests
+   a branch or pull request.
 
 ## Locked constraints
 

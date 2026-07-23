@@ -13,13 +13,15 @@ assets, brand, or distinctive composition.
 
 ## Visual system
 
-- Background: graphite `#080A0D`
-- Primary text: cloud white `#F5F7FB`
-- Primary accent: electric cyan `#52D7E8`
-- Risk: signal amber `#FFB454`
-- Verified: mint `#64DFA2`
+- Ink: `#0B1015`
+- Paper: `#F5F8FC`
+- Primary accent: electric blue `#1268FF`
+- Risk: signal amber `#FFB04A`
+- Verified: mint `#56D99B`
 - Sans type: Geist Sans
 - Code type: Geist Mono
+- Rhythm: oversized editorial type, generous whitespace, numbered sections,
+  and alternating ink, paper, and blue surfaces
 - Motif: connected systems transition from amber risk to mint verification
 
 Motion must be functional, restrained, and disabled by reduced-motion
