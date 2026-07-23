@@ -4,7 +4,7 @@ Last updated: 2026-07-23
 
 ## Active milestone
 
-Milestone 3 — Local product demonstration.
+Milestone 4 — Hosted business layer.
 
 ## Completed
 
@@ -25,6 +25,11 @@ Milestone 3 — Local product demonstration.
 - Enterprise scheduling uses `NEXT_PUBLIC_CAL_LINK` with a truthful
   unconfigured state.
 - Sites project created for private production deployment.
+- Shared Rust engine and CLI implemented.
+- Local STDIO MCP server implemented over the shared engine.
+- TypeScript and Python OpenAPI migration fixtures implemented.
+- Deterministic dry-run, authorized repair, customer-owned verification, and
+  Ed25519-signed offline evidence demonstrated end to end.
 
 ## Blocker
 
@@ -32,11 +37,11 @@ None.
 
 ## Next task
 
-1. Implement the Rust engine and CLI.
-2. Implement the local STDIO MCP server over the same engine.
-3. Add TypeScript and Python fixtures for one OpenAPI change.
-4. Demonstrate deterministic repair, customer-owned verification, and
-   offline-verifiable evidence.
+1. Implement the hosted API and console foundation.
+2. Add idempotency, authentication boundaries, usage metering, and durable job
+   schema.
+3. Add native CI workflow, capsule publishing, and ChangeBench fixtures.
+4. Package customer-controlled deployment.
 
 ## Verification record
 
@@ -54,5 +59,8 @@ Validated on 2026-07-23:
 - The marketing site production build succeeds.
 - Enterprise cards contain no numeric price.
 - Missing Cal.com configuration clearly states that no booking occurred.
+- `cargo test --workspace` passes.
+- `scripts/demo.sh` repairs both language fixtures, runs their checks, exports
+  signed attestations, and verifies them offline.
 
 No product code exists yet.

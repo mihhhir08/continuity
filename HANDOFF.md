@@ -41,6 +41,21 @@ npm run build
 Sites project for this application. `NEXT_PUBLIC_CAL_LINK` is documented in
 `web/.env.example` and must be configured before scheduling is enabled.
 
+## Local engine
+
+The Rust engine, CLI, and MCP server live in `crates/continuity/`.
+
+```bash
+cargo test --workspace
+bash scripts/demo.sh
+cargo run -p continuity -- --help
+cargo run -p continuity -- mcp serve
+```
+
+The demonstration copies fixtures to a temporary directory, so it never
+modifies tracked examples. Private signing keys and generated attestations are
+ignored by Git.
+
 ## Repository publication
 
 Target:
