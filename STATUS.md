@@ -74,3 +74,5 @@ Validated on 2026-07-23:
 - `changebench/run.sh` passes the implemented case and publishes no comparative
   score.
 - Web production build and route tests pass with the console included.
+- Vercel requirements and founder actions are documented in
+  `LAUNCH_CHECKLIST.md`.

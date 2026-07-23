@@ -31,6 +31,8 @@ committed.
 3. Read [STATUS.md](STATUS.md) for the current milestone and next task.
 4. Read [ROADMAP.md](ROADMAP.md) for delivery order and acceptance criteria.
 5. Read [HANDOFF.md](HANDOFF.md) before continuing work in a new session.
+6. Use [LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md) for founder actions,
+   production inputs, Supabase guidance, and Vercel troubleshooting.
 
 ## Documentation
 

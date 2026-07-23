@@ -73,6 +73,8 @@ Compose file. Never commit them. Remaining external setup: Cal.com, billing
 products, production identity, managed data services, signing identity,
 domain/DNS, and design-partner access.
 
+Founder actions and the Vercel diagnosis are in `LAUNCH_CHECKLIST.md`.
+
 ChangeBench currently claims only the implemented endpoint-rename case:
 
 ```bash
