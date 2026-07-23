@@ -4,7 +4,7 @@ Last updated: 2026-07-23
 
 ## Active milestone
 
-Milestone 2 — Marketing site.
+Milestone 3 — Local product demonstration.
 
 ## Completed
 
@@ -19,6 +19,12 @@ Milestone 2 — Marketing site.
 - Initial commit `4a7d76f` created and pushed to `main`.
 - Private repository `mihhhir08/continuity` created.
 - Eight implementation issues created with milestone acceptance criteria.
+- Multi-route marketing site implemented and production build validated.
+- Synthetic Counterfactual Change Network demonstration and original social
+  preview implemented.
+- Enterprise scheduling uses `NEXT_PUBLIC_CAL_LINK` with a truthful
+  unconfigured state.
+- Sites project created for private production deployment.
 
 ## Blocker
 
@@ -26,11 +32,11 @@ None.
 
 ## Next task
 
-1. Create `codex/marketing-site` from current `main`.
-2. Read `LANDING_PAGE.md` and Milestone 2 in `ROADMAP.md`.
-3. Initialize the Sites project exactly once.
-4. Implement and validate the multi-route marketing site.
-5. Update this file and `HANDOFF.md`, then open a draft pull request.
+1. Implement the Rust engine and CLI.
+2. Implement the local STDIO MCP server over the same engine.
+3. Add TypeScript and Python fixtures for one OpenAPI change.
+4. Demonstrate deterministic repair, customer-owned verification, and
+   offline-verifiable evidence.
 
 ## Verification record
 
@@ -45,5 +51,8 @@ Validated on 2026-07-23:
   PRD, roadmap, decision log, and agent instructions.
 - GitHub reports the repository as private with `main` as its default branch.
 - All eight approved implementation issues exist.
+- The marketing site production build succeeds.
+- Enterprise cards contain no numeric price.
+- Missing Cal.com configuration clearly states that no booking occurred.
 
 No product code exists yet.

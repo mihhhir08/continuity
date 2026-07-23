@@ -67,3 +67,9 @@ native CI workflows are supported first.
 Public positioning addresses developers, teams, API providers, and enterprises.
 High-assurance capabilities appear as enterprise security and private
 deployment.
+
+### D-013 — Repository layout
+
+Continuity is a monorepo. The marketing site and future console live in `web/`;
+the shared local engine and adapters live in their own top-level workspaces.
+One Sites project serves the web application.
