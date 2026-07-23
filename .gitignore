@@ -1,0 +1,4 @@
+/target/
+**/.continuity/signing.key
+**/.continuity/attestation.json
+*.log

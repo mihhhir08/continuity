@@ -1,0 +1,6 @@
+{
+  "id": "payments-api-v2",
+  "from": "/v1/jobs",
+  "to": "/v2/runs",
+  "description": "Rename the job creation endpoint before provider release."
+}
