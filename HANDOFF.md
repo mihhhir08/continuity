@@ -16,13 +16,30 @@ Do not start a later milestone while the active milestone remains incomplete.
 
 The private repository is published at
 `https://github.com/mihhhir08/continuity`. The documentation foundation and all
-eight implementation issues are present. No product code, site project, hosted
-resources, billing account, or Cal.com event has been created.
+eight implementation issues are present. The marketing site lives in `web/`,
+has a successful production build, and has an owner-only Sites project.
+No Cal.com event, billing account, or production identity provider has been
+configured.
 
 ## Current blocker
 
 None. GitHub CLI authentication is active for `mihhhir08`. Never copy its token
 into repository files, shell scripts, logs, or documentation.
+
+## Web application
+
+The site is in `web/`. Use:
+
+```bash
+cd web
+npm ci
+npm run dev
+npm run build
+```
+
+`web/.openai/hosting.json` contains the Sites project ID. Never create a second
+Sites project for this application. `NEXT_PUBLIC_CAL_LINK` is documented in
+`web/.env.example` and must be configured before scheduling is enabled.
 
 ## Repository publication
 
