@@ -85,3 +85,11 @@ and append-only usage events. Separate microservices require measured need.
 External identity, billing, signing, storage, domain, and scheduling resources
 are manual production configuration. The product must fail truthfully when
 they are absent and must never commit their credentials.
+
+### D-016 — Marketing visual direction
+
+Continuity uses an original editorial infrastructure design with oversized
+type, generous whitespace, numbered product sections, and alternating ink,
+paper, and electric-blue surfaces. Supermemory informs the business-page
+rhythm only; Continuity does not copy its assets, language, claims, or
+distinctive product presentation.

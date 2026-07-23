@@ -76,3 +76,6 @@ Validated on 2026-07-23:
 - Web production build and route tests pass with the console included.
 - Vercel requirements and founder actions are documented in
   `LAUNCH_CHECKLIST.md`.
+- Marketing UI redesigned with an original editorial ink, paper, and
+  electric-blue system, while preserving truthful claims and product
+  boundaries.
