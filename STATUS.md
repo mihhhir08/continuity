@@ -79,3 +79,5 @@ Validated on 2026-07-23:
 - Marketing UI redesigned with an original editorial ink, paper, and
   electric-blue system, while preserving truthful claims and product
   boundaries.
+- Repository delivery policy updated: completed work goes to `main` unless the
+  user explicitly requests otherwise.

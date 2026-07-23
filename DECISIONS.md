@@ -93,3 +93,9 @@ type, generous whitespace, numbered product sections, and alternating ink,
 paper, and electric-blue surfaces. Supermemory informs the business-page
 rhythm only; Continuity does not copy its assets, language, claims, or
 distinctive product presentation.
+
+### D-017 — Default delivery branch
+
+Completed changes are committed and pushed to `main` unless the user explicitly
+requests a branch or pull request. Feature branches and draft pull requests are
+no longer the default delivery workflow.
