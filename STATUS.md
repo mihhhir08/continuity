@@ -4,7 +4,7 @@ Last updated: 2026-07-23
 
 ## Active milestone
 
-Milestone 4 — Hosted business layer.
+Production configuration and design-partner onboarding.
 
 ## Completed
 
@@ -30,18 +30,26 @@ Milestone 4 — Hosted business layer.
 - TypeScript and Python OpenAPI migration fixtures implemented.
 - Deterministic dry-run, authorized repair, customer-owned verification, and
   Ed25519-signed offline evidence demonstrated end to end.
+- PostgreSQL-backed hosted API implemented with API-key hashing, organization
+  scoping, idempotent mutations, usage events, and durable jobs.
+- Authenticated console, native CI workflow, ChangeBench manifest, and
+  customer-controlled Docker deployment implemented.
+- Enterprise policy example covers source egress, model control, write
+  approval, capsule trust, and evidence retention.
 
 ## Blocker
 
-None.
+External production accounts and values are intentionally not stored in Git.
+The manual configuration list is recorded below and in `HANDOFF.md`.
 
 ## Next task
 
-1. Implement the hosted API and console foundation.
-2. Add idempotency, authentication boundaries, usage metering, and durable job
-   schema.
-3. Add native CI workflow, capsule publishing, and ChangeBench fixtures.
-4. Package customer-controlled deployment.
+1. Configure the real Cal.com event link.
+2. Select a billing provider and create products for the self-serve plans.
+3. Provision production PostgreSQL, object storage, signing identity, and an
+   identity provider.
+4. Run tenant-isolation and disconnected-deployment tests in that environment.
+5. Recruit design partners before publishing performance or customer claims.
 
 ## Verification record
 
@@ -62,5 +70,7 @@ Validated on 2026-07-23:
 - `cargo test --workspace` passes.
 - `scripts/demo.sh` repairs both language fixtures, runs their checks, exports
   signed attestations, and verifies them offline.
-
-No product code exists yet.
+- `platform` tests pass.
+- `changebench/run.sh` passes the implemented case and publishes no comparative
+  score.
+- Web production build and route tests pass with the console included.

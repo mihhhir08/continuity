@@ -1,0 +1,13 @@
+{
+  "source_egress": "deny",
+  "model_provider": "customer",
+  "write_operations": {
+    "dry_run_required": true,
+    "approval_required": true
+  },
+  "capsules": {
+    "trusted_issuers": [],
+    "fail_closed": true
+  },
+  "evidence_retention_days": 365
+}
