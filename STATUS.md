@@ -143,7 +143,8 @@ Validated on 2026-07-23:
   API and remains disabled truthfully until the server-only key and SMTP are
   configured.
 - GitHub Actions are pinned to immutable full commit SHAs and now include
-  platform tests plus a real PostgreSQL hosted lifecycle demonstration.
+  platform tests plus a real PostgreSQL hosted lifecycle demonstration on
+  every push to `main` and every pull request.
 - A stateless remote MCP endpoint exposes organization-scoped projects, risks,
   simulations, approvals, and attestations through the same Supabase
   authorization boundary. Public third-party access remains gated on external
