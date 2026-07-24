@@ -4,6 +4,10 @@ export const brand = {
   tagline: "Software that survives change.",
   description:
     "Predict what software changes will break, repair affected systems locally, and prove they are safe before release.",
+  founder: {
+    name: "Mihir",
+    url: "https://mihirsinhchavda.com/",
+  },
   siteUrl:
     process.env.NEXT_PUBLIC_SITE_URL ??
     "https://continuity-change-infrastructure.mihhhir08.chatgpt.site",

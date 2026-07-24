@@ -39,14 +39,15 @@ Production configuration and design-partner onboarding.
 
 ## Blocker
 
-External production accounts and values are intentionally not stored in Git.
+External production credentials and private values are intentionally not
+stored in Git. The public Cal.com booking URL is deployment configuration.
 The ChangeTwin rename and public open-core launch are additionally blocked on
 domain purchase and trademark clearance. The manual configuration list is
 recorded below, in `BRAND_GATE.md`, and in `HANDOFF.md`.
 
 ## Next task
 
-1. Configure the real Cal.com event link.
+1. Confirm one real Cal.com booking.
 2. Select a billing provider and create products for the self-serve plans.
 3. Provision production PostgreSQL, object storage, signing identity, and an
    identity provider.
@@ -102,3 +103,6 @@ Validated on 2026-07-23:
 - GitHub `main`, Vercel, and private Sites version 4 contain the redesign;
   both production endpoints returned HTTP 200 with the new Compatibility
   Graph content.
+- Hero and pricing CTAs have explicit destinations, Cal.com has an external
+  fallback, the founder credit links to the portfolio, and richer motion
+  graphics retain a complete reduced-motion state.

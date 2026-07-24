@@ -38,8 +38,9 @@ npm run build
 ```
 
 `web/.openai/hosting.json` contains the Sites project ID. Never create a second
-Sites project for this application. `NEXT_PUBLIC_CAL_LINK` is documented in
-`web/.env.example` and must be configured before scheduling is enabled.
+Sites project for this application. The public Cal.com event URL is configured
+through `NEXT_PUBLIC_CAL_LINK` in `web/.env.production`; credentials and private
+deployment values still belong only in platform secret managers.
 
 ## Local engine
 

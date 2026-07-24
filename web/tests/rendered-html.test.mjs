@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(path = "/") {
@@ -21,6 +22,9 @@ test("renders the product truthfully", async () => {
   assert.match(html, /Illustrative simulation/);
   assert.match(html, /Compatibility Graph/);
   assert.match(html, /Book a Call/);
+  assert.match(html, /href="\/docs#get-started"/);
+  assert.match(html, /href="#simulation-preview"/);
+  assert.match(html, /https:\/\/mihirsinhchavda\.com\//);
   assert.match(html, /continuity repair --change openapi-v2\.json --apply --approve/);
   assert.doesNotMatch(html, /continuity repair --dry-run/);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
@@ -44,4 +48,14 @@ test("publishes discovery metadata without exposing the console", async () => {
   const robots = await render("/robots.txt");
   assert.equal(robots.status, 200);
   assert.match(await robots.text(), /Disallow: \/console/);
+});
+
+test("ships working scheduling and founder links in the interactive bundle", async () => {
+  const assets = new URL("../dist/client/assets/", import.meta.url);
+  const marketing = (await readdir(assets)).find((name) => name.startsWith("marketing-") && name.endsWith(".js"));
+  assert.ok(marketing);
+  const client = await readFile(new URL(marketing, assets), "utf8");
+  assert.match(client, /cal\.com\/mihirsinh-chavda-df8o2m\/chat-with-mihir/);
+  assert.match(client, /mihirsinhchavda\.com/);
+  assert.match(client, /Built by/);
 });

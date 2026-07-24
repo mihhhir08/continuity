@@ -34,9 +34,9 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 
 ### Scheduling
 
-1. Create the real Cal.com event.
-2. Add its URL as `NEXT_PUBLIC_CAL_LINK` in production.
-3. Test keyboard focus, Escape-to-close, and one real booking.
+1. The real Cal.com event URL is configured through `NEXT_PUBLIC_CAL_LINK`.
+2. Test one real booking before launch.
+3. Recheck keyboard focus, Escape-to-close, and focus return after UI changes.
 
 ### Payments
 

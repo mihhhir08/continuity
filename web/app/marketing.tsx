@@ -103,7 +103,11 @@ export function SiteFooter() {
         <div><strong>Trust</strong><Link href="/security">Security</Link><Link href="/research">Research</Link><Link href="/enterprise">Enterprise</Link></div>
         <div><strong>Company</strong><Link href="/changelog">Changelog</Link><Link href="/pricing">Pricing</Link><Link href="/enterprise">Contact</Link></div>
       </div>
-      <div className="shell footer-bottom"><span>© 2026 Continuity</span><span>Software that survives change.</span></div>
+      <div className="shell footer-bottom">
+        <span>© 2026 Continuity</span>
+        <a href={brand.founder.url} target="_blank" rel="noreferrer">Built by {brand.founder.name} ↗</a>
+        <span>Software that survives change.</span>
+      </div>
       <div className="footer-word" aria-hidden="true">Continuity.</div>
     </footer>
   );
@@ -115,6 +119,7 @@ export function BookCall({ className = "" }: { className?: string }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLElement>(null);
   const calLink = process.env.NEXT_PUBLIC_CAL_LINK;
+  const embeddedCalLink = calLink ? `${calLink}${calLink.includes("?") ? "&" : "?"}embed=inline&layout=month_view` : undefined;
 
   useEffect(() => {
     const trigger = triggerRef.current;
@@ -144,7 +149,7 @@ export function BookCall({ className = "" }: { className?: string }) {
               <div><span className="eyebrow">Enterprise</span><h2 id="schedule-title">Design your deployment.</h2></div>
               <button ref={closeRef} className="icon-button" onClick={() => setOpen(false)} aria-label="Close scheduling">×</button>
             </div>
-            {calLink ? <iframe title="Schedule with Continuity" src={calLink} className="cal-frame" /> : (
+            {embeddedCalLink ? <><iframe title="Schedule with Continuity" src={embeddedCalLink} className="cal-frame" /><a className="cal-fallback" href={calLink} target="_blank" rel="noreferrer">Open scheduling in a new tab ↗</a></> : (
               <div className="schedule-placeholder"><strong>Scheduling is not configured yet.</strong><p>Set NEXT_PUBLIC_CAL_LINK to enable the embedded calendar. No booking has been created.</p></div>
             )}
           </section>
@@ -162,7 +167,7 @@ function CompatibilityDemo() {
   const [run, setRun] = useState(0);
   const replay = () => setRun((value) => value + 1);
   return (
-    <div className="compat-demo" aria-label="Illustrative simulation of a proposed API change across four integrations">
+    <div className="compat-demo" id="simulation-preview" aria-label="Illustrative simulation of a proposed API change across four integrations">
       <div className="demo-topline"><span><i /> Illustrative simulation</span><button type="button" onClick={replay}>Replay <b aria-hidden="true">↻</b></button></div>
       <div className="demo-canvas" key={run}>
         <div className="provider-card"><span>PROPOSED CHANGE</span><strong>POST /v1/jobs</strong><i>becomes</i><strong>POST /v2/runs</strong></div>
@@ -191,6 +196,39 @@ function ProductVisual({ kind }: { kind: typeof products[number]["kind"] }) {
   if (kind === "evidence") return <div className="product-visual evidence-visual"><div className="seal">✓</div><div className="evidence-sheet"><small>EVIDENCE ATTESTATION</small><h4>Migration verified</h4><p><span>Source hash</span><b>recorded</b></p><p><span>Customer checks</span><b>passed</b></p><p><span>Policy decision</span><b>approved</b></p><footer>Offline-verifiable signature</footer></div></div>;
   if (kind === "policy") return <div className="product-visual policy-visual"><div className="policy-grid"><p><span>Source egress</span><b>DENY</b></p><p><span>Model provider</span><b>CUSTOMER</b></p><p><span>Dry run</span><b>REQUIRED</b></p><p><span>Write approval</span><b>REQUIRED</b></p></div><div className="gate">POLICY<br />GATE <i /></div></div>;
   return <div className="product-visual graph-visual"><div className="graph-hub">CHANGE</div>{["API", "SDK", "APP", "JOB"].map((item, index) => <div className={`graph-node graph-node-${index}`} key={item}>{item}</div>)}<div className="graph-status">Compatibility mapped locally</div></div>;
+}
+
+function MotionRail() {
+  return (
+    <div className="motion-rail" aria-label="A change moving from proposed to verified">
+      <div className="motion-track" aria-hidden="true">
+        {[0, 1, 2, 3, 4, 5].map((item) => <i key={item} />)}
+        <span className="motion-packet">CHANGESET</span>
+      </div>
+      <span>PROPOSED</span><b>SIMULATED</b><b>REPAIRED</b><strong>VERIFIED</strong>
+    </div>
+  );
+}
+
+function NetworkInterlude() {
+  return (
+    <section className="network-interlude" data-reveal>
+      <div className="shell interlude-grid">
+        <div>
+          <span className="eyebrow">Compatibility intelligence</span>
+          <h2>A live map of what change touches.</h2>
+          <p>Contracts become a graph. Risk becomes visible. Every repair stays tied to the system and verification that produced it.</p>
+        </div>
+        <div className="orbit-map" aria-label="Illustration of a provider change connected to local systems">
+          <div className="orbit-ring ring-one" /><div className="orbit-ring ring-two" />
+          <div className="orbit-core"><span>CHANGE</span><b>v2</b></div>
+          {["SDK", "API", "JOB", "APP", "EDGE"].map((name, index) => <div className={`orbit-node orbit-${index}`} key={name}><i />{name}</div>)}
+          <div className="orbit-scan" />
+          <div className="orbit-status"><i /> 4 verified <b /> 1 review</div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function ProductCatalog() {
@@ -238,9 +276,10 @@ function AudienceTabs() {
 export function MarketingPage() {
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    document.documentElement.classList.add("motion-ready");
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("revealed")), { threshold: .12 });
     elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); document.documentElement.classList.remove("motion-ready"); };
   }, []);
 
   return (
@@ -253,13 +292,14 @@ export function MarketingPage() {
           <span className="eyebrow">The change infrastructure</span>
           <h1>Software that<br />survives <em>change.</em></h1>
           <p>Continuity predicts what code and API changes will break, repairs affected systems inside their own environments, and proves they are safe before release.</p>
-          <div className="actions"><Link className="button primary" href="/docs#get-started">Start building <span>↗</span></Link><a className="button ghost" href="#simulation">Run the simulation</a><BookCall /></div>
+          <div className="actions"><Link className="button primary" href="/docs#get-started">Start building <span>↗</span></Link><a className="button ghost" href="#simulation-preview">Run the simulation</a><BookCall /></div>
           <div className="trust-line"><span>LOCAL-FIRST</span><span>MODEL-AGNOSTIC</span><span>OFFLINE-VERIFIABLE</span></div>
           <CompatibilityDemo />
         </div>
       </section>
 
       <section className="trust-strip"><div className="shell"><p>Methods before metrics.</p><span>OPEN FORMATS</span><span>REPRODUCIBLE EVALUATIONS</span><span>CUSTOMER-OWNED VERIFICATION</span></div></section>
+      <div className="shell"><MotionRail /></div>
 
       <section className="section shell" id="product" data-reveal>
         <SectionIndex name="Product catalog" number="01" />
@@ -312,6 +352,8 @@ export function MarketingPage() {
           </div>
         </div>
       </section>
+
+      <NetworkInterlude />
 
       <section className="section shell" id="providers" data-reveal>
         <SectionIndex name="Use cases" number="05" />

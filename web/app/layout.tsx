@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   },
   description: brand.description,
   applicationName: brand.name,
+  authors: [{ name: brand.founder.name, url: brand.founder.url }],
+  creator: brand.founder.name,
   alternates: { canonical: "/" },
   icons: { icon: "/favicon.svg" },
   openGraph: {
@@ -39,6 +41,7 @@ const structuredData = {
   operatingSystem: "Linux, macOS, Windows",
   description: brand.description,
   url: brand.siteUrl,
+  author: { "@type": "Person", name: brand.founder.name, url: brand.founder.url },
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };
 
