@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createHash } from "node:crypto";
+import { hashToken, hashesEqual } from "../src/auth.mjs";
 
 test("documents SHA-256 API-key storage", () => {
-  const digest = createHash("sha256").update("example-only").digest("hex");
+  const digest = hashToken("example-only");
   assert.equal(digest.length, 64);
   assert.notEqual(digest, "example-only");
+  assert.equal(hashesEqual(digest, digest), true);
+  assert.equal(hashesEqual(digest, hashToken("different")), false);
 });

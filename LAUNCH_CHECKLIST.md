@@ -12,6 +12,8 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 3. Use Node.js 22 and deploy `main`.
 4. Confirm the build command is `npm run build:vercel`.
 5. Set `NEXT_PUBLIC_SITE_URL` to the final production origin.
+6. Add `NEXT_PUBLIC_SUPABASE_URL` and
+   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` after completing the Supabase steps.
 
 ### Brand gate
 
@@ -36,7 +38,7 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 
 1. The real Cal.com event URL is configured through `NEXT_PUBLIC_CAL_LINK`.
 2. Test one real booking before launch.
-3. Recheck keyboard focus, Escape-to-close, and focus return after UI changes.
+3. Confirm Book a Call navigates directly to Cal.com on desktop and mobile.
 
 ### Payments
 
@@ -48,7 +50,8 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 ### Production customer data
 
 1. Provision PostgreSQL and object storage.
-2. Choose the identity provider and configure organization SSO.
+2. Configure Supabase passwordless identity; add organization SSO when an
+   enterprise customer requires it.
 3. Provision signing identity and key rotation.
 4. Configure retention, backup, recovery, audit, monitoring, and alerts.
 5. Test tenant isolation, egress denial, restore, and disconnected deployment.
@@ -59,7 +62,7 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 |---|---|
 | Merge pull requests | Move implemented code into the branch deployment services build. |
 | Root Directory `web` | Tell Vercel where the Next.js app and `package.json` live. |
-| Cal.com | Connect Book a Call to a real event without hardcoding it. |
+| Cal.com | Send Book a Call directly to the native scheduling page. |
 | Billing | Create plans, usage records, webhooks, taxes, and failure behavior. |
 | Identity | Add customer and organization authentication, including SSO. |
 | Managed data | Operate PostgreSQL, evidence objects, backups, and recovery. |
@@ -69,18 +72,19 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 ## Implemented
 
 - Multi-route site, private Sites deployment, and Vercel build configuration.
-- Accessible Cal.com modal with truthful missing configuration.
+- Direct Cal.com scheduling without nested modals.
 - Rust CLI, shared engine, and permissioned MCP server.
 - TypeScript and Python OpenAPI migration demonstration.
 - Deterministic repair, customer verification, and Ed25519 evidence.
 - PostgreSQL control-plane foundation with organization scoping, idempotency,
   usage events, and durable jobs.
-- Console, native CI, ChangeBench harness, and Docker deployment.
+- Passwordless-ready developer console, workspace/project/API-key onboarding,
+  native CI, ChangeBench harness, and Docker deployment.
 
 ## Yet to be fixed or implemented
 
 - Complete production tenant-isolation policies and adversarial tests.
-- Connect identity, billing, storage, signing, monitoring, and backups.
+- Configure Supabase, billing, storage, signing, monitoring, and backups.
 - Complete capsule publishing, issuer trust, revocation, and signed WASM.
 - Implement remaining ChangeBench cases; only endpoint rename is measured.
 - Add Java, Go, GraphQL, and gRPC after the initial workflow is proven.
@@ -94,7 +98,8 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 - Production domain.
 - Cal.com event URL.
 - Billing provider and legal business country.
-- Identity provider.
+- Supabase project URL and publishable key, configured in Vercel—not sent in
+  chat.
 - Cloud and production region.
 - Data-residency, retention, recovery, and support requirements.
 - Whether the site should remain private or become public.
@@ -105,17 +110,24 @@ credentials. Configure them in the platform's secret manager.
 
 ## Supabase
 
-Supabase is **not required**. It can provide PostgreSQL and object storage for a
-fast hosted pilot, but it does not replace the Rust engine, MCP, durable
-execution, signing, or private deployment.
+Supabase is the selected hosted-pilot identity and PostgreSQL provider. It does
+not replace the Rust engine, MCP, durable execution, signing, or private
+deployment.
 
-If selected:
-
-1. create a project in the required region;
-2. apply `platform/schema.sql`;
-3. use a server-side pooled database URL;
-4. keep the service-role credential server-side only;
-5. configure backups, recovery, storage policies, and spend limits.
+1. Create a Supabase project in the required region.
+2. In SQL Editor, run `platform/schema.sql`.
+3. Then run `platform/supabase.sql`.
+4. Under Authentication → URL Configuration, set the Site URL to the Vercel
+   production origin and allow `/console` on Vercel, Sites, and the final
+   domain as redirect URLs.
+5. Copy only the Project URL and publishable key into Vercel as
+   `NEXT_PUBLIC_SUPABASE_URL` and
+   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+6. Put the pooled database connection string in the control plane as
+   `DATABASE_URL`; never expose it to the browser.
+7. Keep service-role and database credentials server-side only.
+8. Configure backups, recovery, storage policies, spend limits, and SMTP before
+   inviting production users.
 
 Use customer-managed PostgreSQL for private-cloud or disconnected deployments.
 

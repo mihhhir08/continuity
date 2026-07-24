@@ -86,7 +86,7 @@ export function SiteHeader() {
         <Link href="/pricing" onClick={() => setOpen(false)}>Pricing</Link>
         <Link href="/docs" onClick={() => setOpen(false)}>Docs</Link>
       </nav>
-      <Link className="nav-cta" href="/docs#get-started">Start building <span aria-hidden="true">↗</span></Link>
+      <Link className="nav-cta" href="/console">Start building <span aria-hidden="true">↗</span></Link>
     </header>
   );
 }
@@ -114,49 +114,10 @@ export function SiteFooter() {
 }
 
 export function BookCall({ className = "" }: { className?: string }) {
-  const [open, setOpen] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const modalRef = useRef<HTMLElement>(null);
   const calLink = process.env.NEXT_PUBLIC_CAL_LINK;
-  const embeddedCalLink = calLink ? `${calLink}${calLink.includes("?") ? "&" : "?"}embed=inline&layout=month_view` : undefined;
-
-  useEffect(() => {
-    const trigger = triggerRef.current;
-    if (!open) return;
-    closeRef.current?.focus();
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-      if (event.key !== "Tab" || !modalRef.current) return;
-      const focusable = [...modalRef.current.querySelectorAll<HTMLElement>("button, iframe, a[href], [tabindex]:not([tabindex='-1'])")];
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    document.addEventListener("keydown", onKey);
-    return () => { document.removeEventListener("keydown", onKey); trigger?.focus(); };
-  }, [open]);
-
-  return (
-    <>
-      <button ref={triggerRef} className={className || "button secondary"} onClick={() => setOpen(true)}>Book a Call</button>
-      {open && (
-        <div className="modal-backdrop" role="presentation" onMouseDown={() => setOpen(false)}>
-          <section ref={modalRef} className="modal" role="dialog" aria-modal="true" aria-labelledby="schedule-title" onMouseDown={(event) => event.stopPropagation()}>
-            <div className="modal-head">
-              <div><span className="eyebrow">Enterprise</span><h2 id="schedule-title">Design your deployment.</h2></div>
-              <button ref={closeRef} className="icon-button" onClick={() => setOpen(false)} aria-label="Close scheduling">×</button>
-            </div>
-            {embeddedCalLink ? <><iframe title="Schedule with Continuity" src={embeddedCalLink} className="cal-frame" /><a className="cal-fallback" href={calLink} target="_blank" rel="noreferrer">Open scheduling in a new tab ↗</a></> : (
-              <div className="schedule-placeholder"><strong>Scheduling is not configured yet.</strong><p>Set NEXT_PUBLIC_CAL_LINK to enable the embedded calendar. No booking has been created.</p></div>
-            )}
-          </section>
-        </div>
-      )}
-    </>
-  );
+  return calLink
+    ? <a className={className || "button secondary"} href={calLink}>Book a Call</a>
+    : <Link className={className || "button secondary"} href="/enterprise#contact">Book a Call</Link>;
 }
 
 function SectionIndex({ name, number }: { name: string; number: string }) {
@@ -292,7 +253,7 @@ export function MarketingPage() {
           <span className="eyebrow">The change infrastructure</span>
           <h1>Software that<br />survives <em>change.</em></h1>
           <p>Continuity predicts what code and API changes will break, repairs affected systems inside their own environments, and proves they are safe before release.</p>
-          <div className="actions"><Link className="button primary" href="/docs#get-started">Start building <span>↗</span></Link><a className="button ghost" href="#simulation-preview">Run the simulation</a><BookCall /></div>
+          <div className="actions"><Link className="button primary" href="/console">Start building <span>↗</span></Link><a className="button ghost" href="#simulation-preview">Run the simulation</a><BookCall /></div>
           <div className="trust-line"><span>LOCAL-FIRST</span><span>MODEL-AGNOSTIC</span><span>OFFLINE-VERIFIABLE</span></div>
           <CompatibilityDemo />
         </div>
@@ -390,7 +351,7 @@ export function MarketingPage() {
         <SectionIndex name="Pricing" number="08" />
         <div className="section-head"><span className="eyebrow">Simple entry. Infrastructure depth.</span><h2>Start locally. Scale when the network matters.</h2></div>
         <div className="pricing-grid">
-          {plans.map(([name, price, blurb, a, b]) => <article key={name}><span>{name}</span><div className="price">{price}<small>{price !== "$0" && "/month"}</small></div><p>{blurb}</p><ul><li>{a}</li><li>{b}</li><li>Local CLI + MCP</li></ul><Link className="button ghost" href="/docs#get-started">Start building</Link></article>)}
+          {plans.map(([name, price, blurb, a, b]) => <article key={name}><span>{name}</span><div className="price">{price}<small>{price !== "$0" && "/month"}</small></div><p>{blurb}</p><ul><li>{a}</li><li>{b}</li><li>Local CLI + MCP</li></ul><Link className="button ghost" href={`/console?plan=${name.toLowerCase()}`}>{name === "Free" ? "Start free" : `Choose ${name}`}</Link></article>)}
           <article className="enterprise-card"><span>Enterprise</span><div className="price">Designed with you</div><p>Private deployment and control for consequential systems.</p><ul><li>SSO, policy, and evidence</li><li>Dedicated or disconnected</li><li>Customer-operated models</li><li>SLAs and deployment support</li></ul><BookCall className="button primary" /></article>
         </div>
       </section>
@@ -400,7 +361,7 @@ export function MarketingPage() {
         {faq.map(([question, answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}
       </section>
 
-      <section className="final-cta"><div className="shell" data-reveal><span className="eyebrow">Make change survivable</span><h2>Know before release.<br />Repair before impact.</h2><div className="actions"><Link className="button primary" href="/docs#get-started">Start building</Link><BookCall /></div></div></section>
+      <section className="final-cta"><div className="shell" data-reveal><span className="eyebrow">Make change survivable</span><h2>Know before release.<br />Repair before impact.</h2><div className="actions"><Link className="button primary" href="/console">Start building</Link><BookCall /></div></div></section>
       <SiteFooter />
     </main>
   );

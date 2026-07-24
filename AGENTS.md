@@ -35,6 +35,10 @@ touches those areas.
 - Write-capable agent operations require dry-run and authorization.
 - Enterprise has no public price and uses Book a Call.
 - Cal.com uses `NEXT_PUBLIC_CAL_LINK`.
+- Book a Call navigates directly to Cal.com; do not restore a nested iframe or
+  scheduling modal.
+- Public console authentication uses Supabase passwordless email and RLS.
+- Never expose a Supabase service-role key to the browser.
 - Public positioning addresses developers, teams, providers, and enterprises.
 - Never invent customers, benchmarks, testimonials, certifications, or claims.
 

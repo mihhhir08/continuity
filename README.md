@@ -99,7 +99,7 @@ flowchart LR
 | **CLI** | Local scan, simulation, repair, verification, and evidence export |
 | **MCP** | Permissioned change tools for compatible coding agents |
 | **API / SDKs** | Provider changes, projects, capsules, simulations, and attestations |
-| **Web console** | Change Twins, policies, approvals, usage, evidence, and deployment |
+| **Web console** | Compatibility Graphs, projects, API keys, policies, usage, and evidence |
 
 Native CI workflows integrate repository automation. There is no installed
 source-control application.
@@ -239,13 +239,13 @@ The repository contains:
 - deterministic repair and customer-owned verification;
 - signed, offline-verifiable evidence;
 - a PostgreSQL-backed hosted API foundation;
-- an authenticated console foundation and native CI workflow;
+- a passwordless-ready console with workspace, project, and API-key onboarding;
 - a multi-route Next.js marketing site;
 - customer-controlled and disconnected-deployment foundations.
 
-Production identity, billing, storage, signing, and scheduling accounts remain
-external configuration. No customer, benchmark, certification, or performance
-claim is published without evidence.
+Production Supabase values, billing, storage, and signing remain external
+configuration. No customer, benchmark, certification, or performance claim is
+published without evidence.
 
 See [STATUS.md](STATUS.md) for the current work,
 [LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md) for the remaining founder actions,

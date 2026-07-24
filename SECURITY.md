@@ -67,6 +67,8 @@ aggregated compatibility, and evidence. It does not receive source by default.
 ### Hosted service
 
 - Least-privilege service identities.
+- Passwordless console authentication and organization-scoped PostgreSQL RLS.
+- API-key plaintext shown once and never persisted.
 - Encryption in transit and at rest.
 - Tenant isolation.
 - Immutable audit events.

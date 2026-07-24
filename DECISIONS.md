@@ -115,3 +115,18 @@ with fresh history will contain only the Rust engine, CLI, local MCP, public
 formats, sanitized fixtures, public ChangeBench cases, demonstration, and
 trust documentation. Strategy, web, console, hosted control plane, network
 intelligence, and operational material remain private.
+
+### D-020 — Console identity and onboarding
+
+The public developer console uses Supabase passwordless email authentication
+and PostgreSQL row-level security. Supabase is the managed production option,
+not a second data model: the existing control plane continues to use the same
+PostgreSQL schema. The console can create workspaces, projects, and hashed API
+keys after configuration, while the unconfigured state offers only truthful
+local onboarding.
+
+### D-021 — Direct scheduling
+
+Book a Call navigates directly to the configured Cal.com event. Continuity does
+not wrap Cal.com in its own modal because nested scheduling overlays degrade
+focus, navigation, and mobile usability.

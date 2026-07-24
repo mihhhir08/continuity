@@ -40,8 +40,8 @@ preferences.
 - Docs
 - Sign in
 
-Do not expose a sign-in link until the console exists. Use a truthful waitlist
-or documentation path instead.
+Start Building routes to the developer console. When Supabase is unconfigured,
+the console shows local onboarding rather than a fake account state.
 
 ## Hero
 
@@ -116,10 +116,11 @@ Configuration:
 NEXT_PUBLIC_CAL_LINK
 ```
 
-- Load the Cal.com embed only after the user activates **Book a Call**.
-- Use an accessible modal with focus management and Escape-to-close.
+- Navigate directly to the native Cal.com event after the user activates
+  **Book a Call**.
+- Do not wrap Cal.com in another modal or iframe.
 - Never hardcode the event identifier into shared product logic.
-- When the value is absent in development, show a clear scheduling placeholder.
+- When the value is absent, route to the enterprise contact section.
 - Never show a false booking-success state.
 
 ## Supporting routes

@@ -1,6 +1,6 @@
-import { createHash, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 import pg from "pg";
+import { hashToken, hashesEqual } from "./auth.mjs";
 
 const kinds = new Set(["projects","continuity-boms","change-sets","simulations","migrations","capsules","attestations","events","policies"]);
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
@@ -10,12 +10,19 @@ function json(res, status, body) {
   res.writeHead(status, { "content-type": "application/json", "cache-control": "no-store" });
   res.end(JSON.stringify(body));
 }
-function keyValid(req) {
+async function keyValid(req, organization) {
   const expected = process.env.CONTINUITY_API_KEY_SHA256;
-  if (!expected) return process.env.NODE_ENV !== "production";
   const token = req.headers.authorization?.replace(/^Bearer /, "") || "";
-  const actual = createHash("sha256").update(token).digest("hex");
-  return actual.length === expected.length && timingSafeEqual(Buffer.from(actual), Buffer.from(expected));
+  if (!token) return !expected && process.env.NODE_ENV !== "production";
+  const actual = hashToken(token);
+  if (expected && hashesEqual(actual, expected)) return true;
+  const result = await pool.query(
+    "SELECT id FROM api_keys WHERE organization_id::text=$1 AND key_hash=$2 AND revoked_at IS NULL LIMIT 1",
+    [organization, actual],
+  );
+  if (!result.rowCount) return false;
+  await pool.query("UPDATE api_keys SET last_used_at=now() WHERE id=$1", [result.rows[0].id]);
+  return true;
 }
 async function body(req) {
   let value = "";
@@ -29,12 +36,12 @@ async function body(req) {
 export const server = createServer(async (req, res) => {
   try {
     if (req.url === "/healthz") return json(res, 200, { status: "ok" });
-    if (!keyValid(req)) return json(res, 401, { error: "unauthorized" });
     const match = new URL(req.url, "http://localhost").pathname.match(/^\/v1\/([^/]+)(?:\/([^/]+))?$/);
     if (!match || !kinds.has(match[1])) return json(res, 404, { error: "not_found" });
     const [kind, id] = [match[1], match[2]];
     const organization = req.headers["x-continuity-organization"];
     if (typeof organization !== "string" || !organization) return json(res, 400, { error: "organization_required" });
+    if (!(await keyValid(req, organization))) return json(res, 401, { error: "unauthorized" });
 
     if (req.method === "GET") {
       const result = id

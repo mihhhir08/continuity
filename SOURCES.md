@@ -32,6 +32,10 @@ product's text, assets, or design.
 - [GitHub application authorization guidance](https://docs.github.com/en/apps/using-github-apps/authorizing-github-apps)
   — background research only; Continuity does not require an installed
   source-control application.
+- [Supabase JavaScript client](https://supabase.com/docs/reference/javascript/installing)
+  — official browser client and RLS-backed Data API guidance.
+- [Supabase passwordless email](https://supabase.com/docs/guides/auth/auth-email-passwordless)
+  — magic-link authentication and redirect configuration.
 
 ## Market references
 

@@ -210,6 +210,10 @@ The console manages:
 - private deployment administration.
 
 The console must never be required for local operation.
+When account infrastructure is configured, the console supports passwordless
+email sign-in, workspace creation, project creation, one-time API-key display,
+onboarding progress, and truthful empty states. API-key plaintext is never
+stored; only a SHA-256 digest and display prefix are persisted.
 
 ### Migration Capsules
 

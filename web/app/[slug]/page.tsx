@@ -112,7 +112,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
         </div>
         <div className="route-callout">
           <div><h2>{slug === "enterprise" ? "Design the boundary first." : "Make the next change survivable."}</h2><p>{slug === "enterprise" ? "Private deployment, policy, and evidence—without a separate product fork." : "Start with the local engine. Connect the network when it creates value."}</p></div>
-          {slug === "enterprise" ? <BookCall className="button" /> : <Link className="button" href="/docs#get-started">Start building</Link>}
+          {slug === "enterprise" ? <BookCall className="button" /> : <Link className="button" href="/console">Start building</Link>}
         </div>
       </section>
       <SiteFooter />

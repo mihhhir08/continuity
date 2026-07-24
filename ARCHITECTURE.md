@@ -136,11 +136,18 @@ verified.
 
 ## Authentication
 
+- Web console: Supabase passwordless email with PostgreSQL RLS.
 - Interactive CLI: device authorization.
 - Automation: scoped API keys.
 - Enterprise agents: OIDC workload identity or mTLS.
 - Remote MCP: OAuth with resource-bound access.
 - Local MCP: STDIO with credentials obtained from the environment.
+
+Console-created API keys are generated in the browser with cryptographically
+secure randomness, shown once, and stored only as SHA-256 digests. The hosted
+API validates them inside the requested organization scope. A Supabase
+publishable key may be exposed to the browser; service-role and database
+credentials may not.
 
 ## Deployment
 

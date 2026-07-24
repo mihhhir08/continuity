@@ -48,11 +48,12 @@ recorded below, in `BRAND_GATE.md`, and in `HANDOFF.md`.
 ## Next task
 
 1. Confirm one real Cal.com booking.
-2. Select a billing provider and create products for the self-serve plans.
-3. Provision production PostgreSQL, object storage, signing identity, and an
-   identity provider.
-4. Run tenant-isolation and disconnected-deployment tests in that environment.
-5. Recruit design partners before publishing performance or customer claims.
+2. Create the Supabase project, apply both SQL files, and configure its two
+   public web variables.
+3. Select a billing provider and create products for the self-serve plans.
+4. Provision object storage and a production signing identity.
+5. Run tenant-isolation and disconnected-deployment tests in that environment.
+6. Recruit design partners before publishing performance or customer claims.
 
 ## Verification record
 
@@ -106,3 +107,14 @@ Validated on 2026-07-23:
 - Hero and pricing CTAs have explicit destinations, Cal.com has an external
   fallback, the founder credit links to the portfolio, and richer motion
   graphics retain a complete reduced-motion state.
+- Start Building now enters a truthful developer console with passwordless
+  Supabase authentication, workspace/project onboarding, one-time API-key
+  display, onboarding progress, usage/evidence empty states, and local CLI
+  fallback.
+- Book a Call now navigates directly to Cal.com without a nested modal.
+- PostgreSQL schema, Supabase RLS policies, workspace bootstrap function, and
+  organization-scoped API-key validation are implemented.
+- Next.js 16.2.11 and the hosted build toolchain pass the Vercel and Sites
+  production builds; the full npm audit reports zero known vulnerabilities.
+- Rust workspace tests, formatting, platform tests, web lint, and all five
+  rendered-site tests pass.

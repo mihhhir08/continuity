@@ -18,8 +18,7 @@ The private repository is published at
 `https://github.com/mihhhir08/continuity`. The documentation foundation and all
 eight implementation issues are present. The marketing site lives in `web/`,
 has a successful production build, and has an owner-only Sites project.
-No Cal.com event, billing account, or production identity provider has been
-configured.
+Cal.com is configured. Billing and Supabase production values are not.
 
 ## Current blocker
 
@@ -41,6 +40,17 @@ npm run build
 Sites project for this application. The public Cal.com event URL is configured
 through `NEXT_PUBLIC_CAL_LINK` in `web/.env.production`; credentials and private
 deployment values still belong only in platform secret managers.
+
+The account-backed console is ready for Supabase but remains in a truthful
+local-onboarding mode until these Vercel and Sites variables are configured:
+
+```text
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+```
+
+Apply `platform/schema.sql`, then `platform/supabase.sql`, before enabling
+those values. Never put a service-role key in a `NEXT_PUBLIC_` variable.
 
 ## Local engine
 
@@ -70,9 +80,10 @@ docker compose -f ../deploy/docker-compose.yml up --build
 ```
 
 Required production values are documented in `platform/.env.example` and the
-Compose file. Never commit them. Remaining external setup: Cal.com, billing
-products, production identity, managed data services, signing identity,
-domain/DNS, and design-partner access.
+Compose file. Never commit them. Supabase can host the PostgreSQL database and
+passwordless console identity for the first production deployment. Remaining
+external setup: billing products, Supabase values, signing identity, domain/DNS,
+and design-partner access.
 
 Founder actions and the Vercel diagnosis are in `LAUNCH_CHECKLIST.md`.
 
@@ -131,6 +142,8 @@ Before ending any session:
 - Local execution and local MCP remain first-class.
 - Enterprise shows no price and uses Book a Call.
 - Cal.com uses `NEXT_PUBLIC_CAL_LINK`.
+- Scheduling navigates directly to Cal.com without a nested modal.
+- Console identity uses Supabase passwordless email and RLS.
 - No fabricated customers, benchmarks, certifications, or testimonials.
 - No public source release until the open/private boundary and license are
   explicitly reviewed.
