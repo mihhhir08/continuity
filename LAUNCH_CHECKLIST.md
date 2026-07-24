@@ -14,6 +14,9 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 5. Set `NEXT_PUBLIC_SITE_URL` to the final production origin.
 6. Add `NEXT_PUBLIC_SUPABASE_URL` and
    `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` after completing the Supabase steps.
+7. Add `NEXT_PUBLIC_CONTROL_PLANE_URL` after the hosted API is deployed.
+8. Add `SUPABASE_SERVICE_ROLE_KEY` as a server-only secret for team invitations
+   and billing webhooks.
 
 ### Brand gate
 
@@ -42,10 +45,19 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 
 ### Payments
 
-1. Choose the billing provider.
-2. Create Free, Pro, Max, and Scale products and usage limits.
-3. Store credentials in the deployment platform's secret manager.
-4. Configure webhook signing and test retries and duplicate events.
+1. Create recurring Stripe prices for Pro, Max, and Scale. Free has no Checkout
+   price; Enterprise remains Book a Call.
+2. Add the price IDs as `STRIPE_PRICE_PRO`, `STRIPE_PRICE_MAX`, and
+   `STRIPE_PRICE_SCALE`.
+3. Add `STRIPE_SECRET_KEY` as a server-only deployment secret.
+4. Register `https://<production-domain>/api/billing/webhook` for
+   `checkout.session.completed`, `customer.subscription.updated`, and
+   `customer.subscription.deleted`.
+5. Store its signing secret as `STRIPE_WEBHOOK_SECRET`.
+6. Configure and brand the Stripe customer portal, including products,
+   cancellation, invoices, tax behavior, and the return URL.
+7. Run one sandbox checkout, portal visit, upgrade/downgrade, cancellation,
+   duplicate webhook, and delayed-webhook test.
 
 ### Production customer data
 
@@ -78,14 +90,23 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 - Deterministic repair, customer verification, and Ed25519 evidence.
 - PostgreSQL control-plane foundation with organization scoping, idempotency,
   usage events, and durable jobs.
-- Passwordless-ready developer console, workspace/project/API-key onboarding,
-  native CI, ChangeBench harness, and Docker deployment.
+- Operational developer console covering projects, changes, simulations,
+  approvals, migrations, policies, capsules, evidence, teams, scoped keys,
+  usage, billing, native CI, ChangeBench, and Docker deployment.
+- Customer-operated hosted agent with leases, heartbeats, local repair,
+  customer checks, rollback, and signed evidence.
+- Stripe Checkout, customer portal, signed idempotent webhooks, and database
+  plan enforcement.
+- Signed, expiring, issuer-gated Migration Capsules.
 
 ## Yet to be fixed or implemented
 
-- Complete production tenant-isolation policies and adversarial tests.
-- Configure Supabase, billing, storage, signing, monitoring, and backups.
-- Complete capsule publishing, issuer trust, revocation, and signed WASM.
+- Execute production tenant-isolation, webhook, backup/restore, and adversarial
+  tests after the external environment exists.
+- Configure Supabase, Stripe, SMTP, storage, key custody, monitoring, and
+  backups.
+- Add capsule revocation distribution and signed WASM recipes after a provider
+  pilot requires them.
 - Implement remaining ChangeBench cases; only endpoint rename is measured.
 - Add Java, Go, GraphQL, and gRPC after the initial workflow is proven.
 - Complete legal terms, privacy, support, incident response, and license review.
@@ -97,7 +118,7 @@ engineering. Never paste credentials into GitHub, chat, or source files.
 
 - Production domain.
 - Cal.com event URL.
-- Billing provider and legal business country.
+- Stripe account, legal business country, currency, and tax configuration.
 - Supabase project URL and publishable key, configured in Vercel—not sent in
   chat.
 - Cloud and production region.
@@ -125,9 +146,24 @@ deployment.
    `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
 6. Put the pooled database connection string in the control plane as
    `DATABASE_URL`; never expose it to the browser.
-7. Keep service-role and database credentials server-side only.
-8. Configure backups, recovery, storage policies, spend limits, and SMTP before
+7. Store the server secret as `SUPABASE_SERVICE_ROLE_KEY` in Vercel/Sites only;
+   it enables team invitations and subscription webhook updates.
+8. Keep server-secret and database credentials server-side only.
+9. Configure the magic-link and invite email templates, redirect allowlist,
+   custom SMTP, backups, recovery, storage policies, and spend limits before
    inviting production users.
+
+## Control plane
+
+1. Deploy `platform/` or `deploy/docker-compose.yml` behind HTTPS.
+2. Configure the pooled `DATABASE_URL`.
+3. For the hosted multi-tenant deployment, connect with the database role used
+   for trusted service operations; browser users remain governed by RLS.
+4. Set `NEXT_PUBLIC_CONTROL_PLANE_URL` to its public HTTPS origin.
+5. Run `DATABASE_URL=... bash scripts/hosted-demo.sh` against a disposable
+   environment before inviting users.
+6. Configure health monitoring for `/healthz`, log redaction, rate limiting at
+   the edge, backups, restore drills, and alerting.
 
 Use customer-managed PostgreSQL for private-cloud or disconnected deployments.
 

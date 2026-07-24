@@ -7,16 +7,39 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: continuity
+          POSTGRES_USER: continuity
+          POSTGRES_PASSWORD: continuity
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U continuity"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@4cda84d5c5c54efe2404f9d843567869ab1699d4 # stable
       - run: cargo test --workspace --locked
       - run: bash scripts/demo.sh
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: web/package-lock.json
+          cache-dependency-path: |
+            web/package-lock.json
+            platform/package-lock.json
+      - run: npm ci
+        working-directory: platform
+      - run: npm test
+        working-directory: platform
+      - run: bash scripts/hosted-demo.sh
+        env:
+          DATABASE_URL: postgres://continuity:continuity@127.0.0.1:5432/continuity
       - run: npm ci
         working-directory: web
       - run: npm test

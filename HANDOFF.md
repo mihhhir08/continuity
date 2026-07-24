@@ -18,7 +18,8 @@ The private repository is published at
 `https://github.com/mihhhir08/continuity`. The documentation foundation and all
 eight implementation issues are present. The marketing site lives in `web/`,
 has a successful production build, and has an owner-only Sites project.
-Cal.com is configured. Billing and Supabase production values are not.
+Cal.com is configured. Supabase, Stripe, email, and production control-plane
+values are not.
 
 ## Current blocker
 
@@ -47,10 +48,26 @@ local-onboarding mode until these Vercel and Sites variables are configured:
 ```text
 NEXT_PUBLIC_SUPABASE_URL
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+NEXT_PUBLIC_CONTROL_PLANE_URL
 ```
 
 Apply `platform/schema.sql`, then `platform/supabase.sql`, before enabling
 those values. Never put a service-role key in a `NEXT_PUBLIC_` variable.
+
+Server-only web values:
+
+```text
+SUPABASE_SERVICE_ROLE_KEY
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
+STRIPE_PRICE_PRO
+STRIPE_PRICE_MAX
+STRIPE_PRICE_SCALE
+```
+
+The Supabase server secret is required only for team invitations and
+subscription webhook updates. It must exist in deployment secrets, never in
+browser code or Git.
 
 ## Local engine
 
@@ -61,6 +78,7 @@ cargo test --workspace
 bash scripts/demo.sh
 cargo run -p continuity -- --help
 cargo run -p continuity -- mcp serve
+cargo run -p continuity -- agent serve --project <project-id>
 ```
 
 The demonstration copies fixtures to a temporary directory, so it never
@@ -79,11 +97,23 @@ npm test
 docker compose -f ../deploy/docker-compose.yml up --build
 ```
 
-Required production values are documented in `platform/.env.example` and the
-Compose file. Never commit them. Supabase can host the PostgreSQL database and
-passwordless console identity for the first production deployment. Remaining
-external setup: billing products, Supabase values, signing identity, domain/DNS,
-and design-partner access.
+Required production values are documented in `platform/.env.example`, the web
+environment example, and the Compose file. Never commit them. The hosted
+lifecycle can be verified against a disposable PostgreSQL database:
+
+```bash
+DATABASE_URL=postgres://... bash scripts/hosted-demo.sh
+```
+
+The console and control plane cover the complete change-set → simulation →
+approval → local repair → verification → attestation workflow. Remaining work
+is external activation: Supabase/SMTP, hosted database/API deployment, Stripe
+products/webhook/portal, storage and backups, signing-key custody, monitoring,
+domain/DNS, and design-partner access.
+
+Remote MCP is implemented at `/api/mcp` with the authenticated Supabase
+organization token. Do not advertise it for public third-party clients until an
+OAuth authorization server and resource metadata are configured and tested.
 
 Founder actions and the Vercel diagnosis are in `LAUNCH_CHECKLIST.md`.
 

@@ -86,7 +86,7 @@ workflow:
 2. Run `continuity scan` to generate a local dependency and service graph.
 3. Run `continuity simulate` against a selected change.
 4. Review impact findings and a proposed repair.
-5. Run `continuity repair --dry-run`, approve, then apply.
+5. Run `continuity repair` for the default dry run, approve it, then apply.
 6. Run `continuity verify`.
 7. Export a signed evidence bundle.
 
@@ -134,6 +134,10 @@ continuity simulate
 continuity repair
 continuity verify
 continuity export
+continuity agent run-once
+continuity agent serve
+continuity capsule create
+continuity capsule verify
 continuity capsule apply
 continuity mcp serve
 ```
@@ -195,6 +199,16 @@ Initial resource groups:
 All mutations accept an idempotency key. Long operations return a job
 identifier and stream progress through server-sent events.
 
+The hosted execution loop must:
+
+1. queue a project-scoped simulation or migration;
+2. lease it to an `agent`-scoped customer process;
+3. reclaim interrupted expired leases;
+4. require reviewed dry-run and authorization fields for repair;
+5. roll back modified files when verification fails;
+6. atomically complete the job and its public record;
+7. create an attestation record only from a verified local-agent result.
+
 ### Web console
 
 The console manages:
@@ -208,12 +222,19 @@ The console manages:
 - policies and approvals;
 - capsules and attestations;
 - private deployment administration.
+- team invitations and organization roles;
+- live job state and Compatibility Graph counts;
+- change-set creation and simulation queueing;
+- explicit migration approval;
+- evidence export and scoped credential revocation.
 
 The console must never be required for local operation.
 When account infrastructure is configured, the console supports passwordless
 email sign-in, workspace creation, project creation, one-time API-key display,
 onboarding progress, and truthful empty states. API-key plaintext is never
 stored; only a SHA-256 digest and display prefix are persisted.
+Self-serve billing redirects to provider-hosted Checkout and billing portal
+sessions. Verified webhooks, not the browser, update plan state.
 
 ### Migration Capsules
 

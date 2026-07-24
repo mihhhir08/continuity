@@ -1,0 +1,159 @@
+openapi: 3.1.0
+info:
+  title: Continuity Control Plane
+  version: 0.1.0
+  description: Organization-scoped metadata coordination for local Continuity agents.
+servers:
+  - url: https://api.example.com
+security:
+  - bearerAuth: []
+parameters:
+  Organization:
+    name: x-continuity-organization
+    in: header
+    required: true
+    schema:
+      type: string
+      format: uuid
+  Idempotency:
+    name: idempotency-key
+    in: header
+    required: true
+    schema:
+      type: string
+paths:
+  /healthz:
+    get:
+      security: []
+      responses:
+        "200":
+          description: Healthy
+  /v1/{kind}:
+    get:
+      parameters:
+        - $ref: "#/parameters/Organization"
+        - name: kind
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Kind"
+      responses:
+        "200":
+          description: Organization-scoped records
+    post:
+      parameters:
+        - $ref: "#/parameters/Organization"
+        - $ref: "#/parameters/Idempotency"
+        - name: kind
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Kind"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "201":
+          description: Created idempotently
+        "402":
+          description: Plan limit reached
+  /v1/{kind}/{id}:
+    get:
+      parameters:
+        - $ref: "#/parameters/Organization"
+        - name: kind
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Kind"
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Record
+        "404":
+          description: Not found
+  /v1/events/claim:
+    post:
+      parameters:
+        - $ref: "#/parameters/Organization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [project_id]
+              properties:
+                project_id:
+                  type: string
+                  format: uuid
+      responses:
+        "200":
+          description: Claimed job or null when the queue is empty
+  /v1/events/stream:
+    get:
+      parameters:
+        - $ref: "#/parameters/Organization"
+      responses:
+        "200":
+          description: Server-sent record-state events and keepalives
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /v1/events/{job_id}/heartbeat:
+    post:
+      parameters:
+        - $ref: "#/parameters/Organization"
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Lease extended
+  /v1/events/{job_id}/complete:
+    post:
+      parameters:
+        - $ref: "#/parameters/Organization"
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [state, output]
+              properties:
+                state:
+                  enum: [awaiting_approval, verified, failed, partial, rejected]
+                output:
+                  type: object
+      responses:
+        "200":
+          description: Job and corresponding record completed atomically
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Keys are separately scoped for agent execution, orchestration, provider writes, or reads.
+  schemas:
+    Kind:
+      type: string
+      enum: [projects, continuity-boms, change-sets, simulations, migrations, capsules, attestations, events, policies]

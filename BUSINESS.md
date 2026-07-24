@@ -87,6 +87,12 @@ Metering is based on bounded verified-repair credits and project limits, not
 unbounded model tokens. Plans include hard spend controls. Customer-operated
 models reduce hosted compute use.
 
+Self-serve conversion uses Stripe-hosted Checkout and the customer portal.
+PostgreSQL enforces plan limits independently of the interface, and only
+verified, idempotently processed webhooks change subscription state. Initial
+limits are operating defaults to revise from measured usage, not throughput or
+performance promises.
+
 ## Distribution loops
 
 ### Developer loop

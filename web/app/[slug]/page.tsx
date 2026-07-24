@@ -27,7 +27,7 @@ const pages: Record<string, Page> = {
     intro: "The CLI, MCP server, API, and console share the same change, repair, policy, and evidence semantics.",
     sectionTitle: "Start with the local truth.",
     sectionIntro: "The core workflow runs without an account. Repair previews by default and only writes after explicit approval.",
-    cards: [["Initialize", "continuity init"], ["Map the project", "continuity scan"], ["Simulate", "continuity simulate --change proposed-change.json"], ["Preview repair", "continuity repair --change proposed-change.json"], ["Apply repair", "continuity repair --change proposed-change.json --apply --approve"], ["Verify and export", "continuity verify · continuity export --change proposed-change.json"]],
+    cards: [["Initialize", "continuity init"], ["Map the project", "continuity scan"], ["Simulate", "continuity simulate --change proposed-change.json"], ["Preview repair", "continuity repair --change proposed-change.json"], ["Apply repair", "continuity repair --change proposed-change.json --apply --approve"], ["Verify and export", "continuity verify · continuity export --change proposed-change.json"], ["Connect hosted coordination", "continuity agent serve --project <project-id>"], ["Serve local MCP", "continuity mcp serve"]],
   },
   mcp: {
     title: "A safer change tool for every agent.",
@@ -35,7 +35,7 @@ const pages: Record<string, Page> = {
     intro: "Give compatible agents structured change intelligence without giving them silent permission to modify a repository.",
     sectionTitle: "Read broadly. Write deliberately.",
     sectionIntro: "STDIO keeps local use simple. Every write-capable call remains distinct, dry-run-first, and authorization-bound.",
-    cards: [["Resources", "Current project, Compatibility Graph, changes, migrations, and attestations."], ["Read tools", "scan_project · list_change_risks · simulate_change · get_attestation"], ["Repair planning", "propose_repair returns a mandatory dry-run result."], ["Write tool", "apply_repair requires dry_run_reviewed and authorized."], ["Verification", "verify_migration runs customer-owned checks."], ["Transport", "STDIO locally; OAuth-protected remote MCP through the hosted API."]],
+    cards: [["Resources", "Current project, Compatibility Graph, changes, migrations, and attestations."], ["Local read tools", "scan_project · list_change_risks · simulate_change · get_attestation"], ["Repair planning", "propose_repair returns a mandatory dry-run result."], ["Write tool", "apply_repair requires dry_run_reviewed and authorized."], ["Remote coordination", "Authenticated Streamable HTTP tools list projects and risks, queue simulations, approve migrations, and read evidence."], ["Transport", "STDIO locally; /api/mcp remotely. Add the resource-bound OAuth gateway before public third-party client access."]],
   },
   research: {
     title: "Methods before metrics.",

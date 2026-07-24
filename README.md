@@ -104,6 +104,10 @@ flowchart LR
 Native CI workflows integrate repository automation. There is no installed
 source-control application.
 
+Local MCP runs over STDIO. The web application also provides authenticated
+Streamable HTTP coordination at `/api/mcp`; public third-party access remains
+closed until its resource-bound OAuth gateway is configured.
+
 ## Run the end-to-end demonstration
 
 ### Requirements
@@ -141,6 +145,11 @@ continuity repair --change proposed-change.json --apply --approve
 continuity verify
 continuity export --change proposed-change.json
 continuity attestation-verify .continuity/attestation.json
+continuity agent serve --project <project-id>
+continuity capsule create --issuer provider.example --artifact api.example/openapi --change proposed-change.json --output capsule.json
+continuity capsule verify capsule.json
+continuity capsule apply --capsule capsule.json --trust-issuer provider.example
+continuity capsule apply --capsule capsule.json --trust-issuer provider.example --apply --approve
 continuity mcp serve
 ```
 
@@ -159,6 +168,27 @@ The local STDIO MCP server exposes the same Rust engine as the CLI.
 
 `apply_repair` fails unless the caller confirms that the dry run was reviewed
 and the write was authorized.
+
+## Hosted lifecycle
+
+The console creates a project and change set, then queues a simulation. A
+customer-operated process claims that leased job:
+
+```bash
+export CONTINUITY_API_URL=https://api.example.com
+export CONTINUITY_ORGANIZATION=<workspace-id>
+export CONTINUITY_API_KEY=<agent-scoped-key>
+continuity agent serve --project <project-id>
+```
+
+The agent uploads hashes and compatibility counts for simulation. After an
+administrator approves repair, it changes files locally, runs the repository's
+checks, restores the original files on failure, and returns signed evidence on
+success. A real PostgreSQL-backed lifecycle check is included:
+
+```bash
+DATABASE_URL=postgres://... ./scripts/hosted-demo.sh
+```
 
 ```bash
 continuity mcp serve
@@ -199,6 +229,7 @@ continuity/
 ├── web/                  Next.js marketing site and console
 ├── deploy/               Customer-controlled deployment examples
 ├── scripts/demo.sh       End-to-end local demonstration
+├── scripts/hosted-demo.sh Hosted queue-to-attestation demonstration
 └── *.md                  Product, security, business, and operating record
 ```
 
@@ -238,14 +269,19 @@ The repository contains:
 - a reproducible TypeScript and Python migration demonstration;
 - deterministic repair and customer-owned verification;
 - signed, offline-verifiable evidence;
-- a PostgreSQL-backed hosted API foundation;
-- a passwordless-ready console with workspace, project, and API-key onboarding;
+- a PostgreSQL-backed API with leased jobs, SSE, idempotency, quotas, and scoped
+  automation credentials;
+- an operational passwordless console for changes, simulations, approvals,
+  migrations, policies, capsules, evidence, teams, usage, and billing;
+- Stripe Checkout, signed webhooks, customer billing portal, and enforced plan
+  limits;
+- signed, expiring, issuer-gated Migration Capsules;
 - a multi-route Next.js marketing site;
 - customer-controlled and disconnected-deployment foundations.
 
-Production Supabase values, billing, storage, and signing remain external
-configuration. No customer, benchmark, certification, or performance claim is
-published without evidence.
+Production Supabase, Stripe, database, email, storage, monitoring, and key
+custody remain external account configuration. No customer, benchmark,
+certification, or performance claim is published without evidence.
 
 See [STATUS.md](STATUS.md) for the current work,
 [LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md) for the remaining founder actions,

@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render(path = "/") {
+async function render(path = "/", init) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
   return worker.fetch(
-    new Request(`http://localhost${path}`, { headers: { accept: "text/html" } }),
+    new Request(`http://localhost${path}`, { headers: { accept: "text/html", ...(init?.headers ?? {}) }, ...init }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
@@ -69,4 +69,29 @@ test("ships working scheduling and founder links in the interactive bundle", asy
   assert.doesNotMatch(client, /embed=inline|cal-frame/);
   assert.match(client, /mihirsinhchavda\.com/);
   assert.match(client, /Built by/);
+  assert.match(client, /Compatibility Graph/);
+  assert.match(client, /Approve repair/);
+  assert.match(client, /Migration Capsules/);
+  assert.match(client, /Evidence Vault/);
+  assert.match(client, /agent serve --project/);
+});
+
+test("billing fails truthfully until provider credentials are configured", async () => {
+  const response = await render("/api/billing/checkout", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ organization_id: "00000000-0000-4000-8000-000000000000", plan: "pro" }),
+  });
+  assert.equal(response.status, 503);
+  assert.match(await response.text(), /not configured/i);
+});
+
+test("remote MCP fails truthfully until identity is configured", async () => {
+  const response = await render("/api/mcp", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "initialize" }),
+  });
+  assert.equal(response.status, 503);
+  assert.match(await response.text(), /not configured/i);
 });

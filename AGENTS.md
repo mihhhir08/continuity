@@ -39,6 +39,14 @@ touches those areas.
   scheduling modal.
 - Public console authentication uses Supabase passwordless email and RLS.
 - Never expose a Supabase service-role key to the browser.
+- Treat the local agent as the only authority allowed to complete hosted
+  simulation and migration jobs or create verified attestations.
+- Preserve API-key scope separation: `agent`, `orchestrate`, `read`, and
+  `write` are not interchangeable.
+- A failed verification must restore modified files and must not create
+  verified evidence.
+- Billing state comes from a verified, idempotently processed Stripe webhook;
+  UI selections are not payment confirmation.
 - Public positioning addresses developers, teams, providers, and enterprises.
 - Never invent customers, benchmarks, testimonials, certifications, or claims.
 

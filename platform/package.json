@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "schema": "node src/apply-schema.mjs",
     "start": "node src/server.mjs",
     "test": "node --test test/*.test.mjs"
   },

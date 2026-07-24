@@ -36,6 +36,18 @@ product's text, assets, or design.
   — official browser client and RLS-backed Data API guidance.
 - [Supabase passwordless email](https://supabase.com/docs/guides/auth/auth-email-passwordless)
   — magic-link authentication and redirect configuration.
+- [Supabase Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)
+  — browser Data API authorization and service-key boundaries.
+- [Supabase user invitations](https://supabase.com/docs/guides/auth/users#inviting-users)
+  — trusted-server invitation delivery.
+- [Stripe subscriptions](https://docs.stripe.com/payments/subscriptions) —
+  subscription Checkout sessions and recurring prices.
+- [Stripe webhook signatures](https://docs.stripe.com/webhooks/signature) —
+  raw-payload event verification.
+- [Stripe customer portal](https://docs.stripe.com/customer-management/integrate-customer-portal)
+  — authenticated portal-session redirects and webhook synchronization.
+- [GitHub Actions secure use](https://docs.github.com/en/actions/reference/security/secure-use)
+  — immutable full-SHA action pinning and least-privilege permissions.
 
 ## Market references
 

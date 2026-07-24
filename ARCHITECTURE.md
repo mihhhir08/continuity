@@ -74,6 +74,15 @@ Runs metadata aggregation, provider simulation coordination, event delivery,
 and other hosted jobs. Repair execution remains local unless a customer
 explicitly selects a managed execution environment.
 
+### Customer-operated agent
+
+`continuity agent serve --project <id>` holds an `agent`-scoped credential and
+polls the PostgreSQL durable queue. It claims one leased project job, executes
+against the selected local repository, heartbeats before consequential work,
+and reports a terminal outcome. Expired leases are reclaimable after an
+interruption. Simulation reports only counts and hashes; repair uploads signed
+evidence after customer checks pass.
+
 ## Technology decisions
 
 - Rust for the local engine, CLI, and local MCP server.
@@ -134,6 +143,9 @@ queued → running → awaiting_approval → verifying → verified
 Unknown, partial, cancelled, rejected, and failed must never be presented as
 verified.
 
+If verification fails after a repair is applied, the engine restores every
+affected file from its pre-repair snapshot before reporting failure.
+
 ## Authentication
 
 - Web console: Supabase passwordless email with PostgreSQL RLS.
@@ -148,6 +160,18 @@ secure randomness, shown once, and stored only as SHA-256 digests. The hosted
 API validates them inside the requested organization scope. A Supabase
 publishable key may be exposed to the browser; service-role and database
 credentials may not.
+
+Scopes separate local agents, CI orchestration, provider publishing, and
+read-only integrations. Agent keys are additionally bound to one project. The
+database and API reject cross-project claims and forged verified records.
+
+## Billing
+
+The web server creates Stripe-hosted Checkout and customer-portal sessions only
+after validating the Supabase user and organization role. Raw webhook bodies
+are verified with Stripe's signing secret and a timestamp tolerance. Event IDs
+are recorded once before subscription state changes. Browser plan selection is
+never authoritative.
 
 ## Deployment
 

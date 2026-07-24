@@ -130,3 +130,33 @@ local onboarding.
 Book a Call navigates directly to the configured Cal.com event. Continuity does
 not wrap Cal.com in its own modal because nested scheduling overlays degrade
 focus, navigation, and mobile usability.
+
+### D-022 — End-to-end hosted execution
+
+The console coordinates changes and approvals while a customer-operated local
+agent claims leased jobs from the hosted control plane. Simulation, repair,
+verification, rollback, signing, and source access remain inside the customer
+boundary. Hosted job output contains compatibility summaries and evidence, not
+source files or patches.
+
+### D-023 — Least-privilege automation credentials
+
+API keys have explicit `agent`, `orchestrate`, `read`, or `write` scopes.
+Agent keys are additionally bound to one project.
+Attestations can only be created from successful local-agent completion.
+Provider publishing keys cannot approve repairs, and agent keys cannot create
+arbitrary control-plane records.
+
+### D-024 — Self-serve billing
+
+Pro, Max, and Scale use Stripe-hosted Checkout and the Stripe customer portal.
+Signed, idempotently recorded webhooks are authoritative for subscription
+state. The console never claims payment or an active plan before the webhook is
+processed.
+
+### D-025 — Plan enforcement
+
+Plan limits are enforced at the PostgreSQL trust boundary for projects,
+simulations, and verified repairs. Initial limits are configuration data in
+`plan_limits`, not public performance claims, and can be revised from measured
+usage.

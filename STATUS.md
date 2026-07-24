@@ -4,7 +4,9 @@ Last updated: 2026-07-23
 
 ## Active milestone
 
-Production configuration and design-partner onboarding.
+Milestone 4 production activation and design-partner onboarding. The product
+code is implemented end to end; external accounts and production credentials
+remain the activation gate.
 
 ## Completed
 
@@ -47,13 +49,17 @@ recorded below, in `BRAND_GATE.md`, and in `HANDOFF.md`.
 
 ## Next task
 
-1. Confirm one real Cal.com booking.
-2. Create the Supabase project, apply both SQL files, and configure its two
-   public web variables.
-3. Select a billing provider and create products for the self-serve plans.
-4. Provision object storage and a production signing identity.
-5. Run tenant-isolation and disconnected-deployment tests in that environment.
-6. Recruit design partners before publishing performance or customer claims.
+1. Create the Supabase project, apply both SQL files, configure Auth URLs and
+   SMTP, and add its public and server-only values to Vercel.
+2. Deploy the control plane with the pooled `DATABASE_URL`, set
+   `NEXT_PUBLIC_CONTROL_PLANE_URL`, and run the hosted lifecycle check.
+3. Create Stripe products/prices, register the webhook, configure its portal,
+   and add the documented secrets and price IDs.
+4. Confirm one real Cal.com booking and one Stripe sandbox subscription.
+5. Provision production object storage, backup/restore, monitoring, and signing
+   key custody.
+6. Run tenant-isolation and disconnected-deployment tests in that environment.
+7. Recruit design partners before publishing performance or customer claims.
 
 ## Verification record
 
@@ -116,5 +122,29 @@ Validated on 2026-07-23:
   organization-scoped API-key validation are implemented.
 - Next.js 16.2.11 and the hosted build toolchain pass the Vercel and Sites
   production builds; the full npm audit reports zero known vulnerabilities.
-- Rust workspace tests, formatting, platform tests, web lint, and all five
+- Rust workspace tests, formatting, platform tests, web lint, and all seven
   rendered-site tests pass.
+- Console now operates the product rather than stopping at onboarding:
+  projects, change sets, live Compatibility Graph counts, simulations,
+  approvals, migrations, policies, capsules, evidence export, usage, scoped
+  keys, billing, and team access are present.
+- Customer-operated agents claim leased hosted jobs, return privacy-preserving
+  simulation summaries, perform authorized repairs locally, run customer
+  checks, roll back failed repairs, and upload signed evidence.
+- Evidence signatures cover the full verification result and fail after
+  tampering. Migration Capsules are signed, expiring, issuer-gated, and
+  independently verified by both Rust and the hosted API.
+- Plan limits, Stripe Checkout, customer portal sessions, signed idempotent
+  webhooks, and subscription-state persistence are implemented.
+- Supabase organization roles and RLS prevent viewers from writing, reserve
+  approvals and credentials for administrators, and prohibit browser clients
+  from forging simulations, migrations, or attestations.
+- Team invitation delivery is implemented through the trusted Supabase Admin
+  API and remains disabled truthfully until the server-only key and SMTP are
+  configured.
+- GitHub Actions are pinned to immutable full commit SHAs and now include
+  platform tests plus a real PostgreSQL hosted lifecycle demonstration.
+- A stateless remote MCP endpoint exposes organization-scoped projects, risks,
+  simulations, approvals, and attestations through the same Supabase
+  authorization boundary. Public third-party access remains gated on external
+  resource-bound OAuth configuration.

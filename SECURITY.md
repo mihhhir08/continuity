@@ -69,6 +69,17 @@ aggregated compatibility, and evidence. It does not receive source by default.
 - Least-privilege service identities.
 - Passwordless console authentication and organization-scoped PostgreSQL RLS.
 - API-key plaintext shown once and never persisted.
+- API keys are least-privilege scoped; agent, orchestration, provider-write,
+  and read access are separated, and agent keys are bound to one project.
+- Attestation signatures cover verification commands, exit results, hashes,
+  timestamps, and the verified state; changing any signed field invalidates
+  the evidence.
+- Migration Capsules are signed, expiring, and fail closed when the issuer is
+  not explicitly trusted.
+- Failed hosted repairs restore their pre-repair files before reporting
+  failure.
+- Stripe webhook bodies are signature- and timestamp-verified and event IDs are
+  processed idempotently.
 - Encryption in transit and at rest.
 - Tenant isolation.
 - Immutable audit events.

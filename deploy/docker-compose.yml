@@ -20,6 +20,7 @@ services:
       NODE_ENV: production
       DATABASE_URL: postgres://continuity:${POSTGRES_PASSWORD}@postgres:5432/continuity
       CONTINUITY_API_KEY_SHA256: ${CONTINUITY_API_KEY_SHA256:?set CONTINUITY_API_KEY_SHA256}
+      CONTINUITY_ORGANIZATION_NAME: ${CONTINUITY_ORGANIZATION_NAME:-Self-hosted organization}
     depends_on:
       postgres:
         condition: service_healthy
