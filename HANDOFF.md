@@ -16,8 +16,9 @@
 | Working product name | **Continuity** |
 | Preferred future name | **ChangeTwin**, blocked by the brand gate |
 | Repository | `https://github.com/mihhhir08/continuity` |
+| Repository visibility | **Public by explicit founder approval on 2026-07-24** |
 | Branch and delivery rule | Commit completed work directly to `main` unless the founder says otherwise |
-| Local `HEAD` before this handoff | `77981ba8dc91783702972d64a549ca59b48243c1` |
+| Published handoff commit | `0b9eed0` |
 | Latest verified GitHub workflow | `Continuity` run `30065137339`, passed on `77981ba` |
 | Vercel production | `https://continuity-eight.vercel.app/` |
 | Secondary Sites project | `appgprj_6a62715872d881919f7d1dc6a0c20f8e` |
@@ -25,22 +26,18 @@
 | Founder portfolio | `https://mihirsinhchavda.com/` |
 | Active milestone | Production activation and design-partner onboarding |
 
-### Urgent repository visibility conflict
+### Public repository decision
 
-GitHub reported the repository as **PUBLIC** on 2026-07-24. That conflicts with
-the locked plan: the commercial monorepo, its strategy documents, hosted
-control plane, console, and marketing source were intended to remain private.
+The founder intentionally made `mihhhir08/continuity` public and explicitly
+approved publishing the complete `HANDOFF.md`, including internal strategy and
+architecture, on 2026-07-24. Treat the monorepo and its full Git history as
+public information. Do not describe its PRD, business plan, console, hosted
+control plane, or operational documentation as private.
 
-Do not assume this visibility is intentional. The founder must explicitly
-choose one of these actions before further public-release work:
-
-1. restore `mihhhir08/continuity` to private immediately; or
-2. explicitly replace the private-monorepo strategy after a full history,
-   secret, legal, and intellectual-property review.
-
-The intended public release is a **different repository with fresh Git
-history**, created by `scripts/export-open-core.sh`. Never make this monorepo
-public merely to launch the open core.
+The earlier private-monorepo plus fresh open-core repository plan is superseded
+for the current repository. `scripts/export-open-core.sh` remains available
+only if the founder later wants a smaller package-focused repository with clean
+history; it cannot make information already published here private again.
 
 A current-worktree credential-pattern scan found only documented local demo
 database strings, not a live credential. A second scan across Git patches found
@@ -303,29 +300,27 @@ private repository. Rename the product feature formerly called “Change Twin”
 to **Compatibility Graph** so it does not duplicate the company name. Preserve
 REST paths and entity schemas under `/v1`.
 
-### Intended repositories
+### Repository direction
 
-- Private commercial monorepo: rename to `changetwin-internal`.
-- Fresh open-core repository: create `mihhhir08/changetwin`.
-- Public open-core license: MIT.
-- Never reuse this monorepo's Git history for the public repository.
+- The current full monorepo is public by founder decision.
+- A future rename may rename this repository after the brand gate is cleared.
+- A separate `mihhhir08/changetwin` repository is optional, not the current
+  privacy boundary.
+- If a separate open-core repository is created, use fresh history and the MIT
+  license.
 
 The public allowlist includes only the Rust engine/CLI, local MCP, root Cargo
 manifests, sanitized TypeScript/Python fixtures, public ChangeBench cases,
 demonstration, open formats/policy example, public README, sanitized trust
 documentation, community files, MIT license, and minimal pinned CI.
 
-Keep private: PRD, business plan, decision/status/launch records, internal
-research, marketing site, authenticated console, hosted control plane, billing,
-provider-network intelligence, registry/commercial deployment code, internal
-agent instructions, production configuration, and operational material.
-
-`scripts/export-open-core.sh` enforces the allowlist and refuses to run while
-the brand gate is pending. Before public visibility: use fresh history, scan
-secrets, audit dependencies, run tests/demo/format/Clippy, pin Actions by full
-SHA, use a GitHub noreply commit address, enable secret scanning/push
-protection/Dependabot/CodeQL/private vulnerability reporting, and obtain the
-founder's explicit confirmation.
+`scripts/export-open-core.sh` enforces the historical allowlist and refuses to
+run while the brand gate is pending. If it is used for a separate repository,
+use fresh history, scan secrets, audit dependencies, run
+tests/demo/format/Clippy, pin Actions by full SHA, use a GitHub noreply commit
+address, enable secret scanning, push protection, Dependabot, CodeQL, and
+private vulnerability reporting, and obtain the founder's explicit
+confirmation.
 
 ## 8. What has been implemented
 
@@ -651,13 +646,14 @@ Never send passwords, database credentials, service-role keys, Stripe secrets,
 private signing keys, or tokens in chat. Put them directly into the relevant
 platform's encrypted secret manager.
 
-### 0. Resolve repository visibility
+### 0. Maintain the public repository safely
 
-- Decide whether the current PUBLIC state was intentional.
-- Recommended: restore this monorepo to private immediately.
-- Run a full Git-history secret scan.
-- Review whether internal strategy/IP was exposed.
+- Keep credentials and production secrets out of Git.
+- Run a dedicated full-history secret scan.
+- Enable GitHub secret scanning, push protection, Dependabot, CodeQL, and
+  private vulnerability reporting.
 - Rotate any credential that ever appeared in history, even if deleted later.
+- Require an explicit founder decision before changing visibility again.
 
 ### 1. Create and configure Supabase
 
@@ -782,7 +778,6 @@ customer.subscription.deleted
 
 ### Information still required from the founder
 
-- Whether the current public GitHub visibility was intentional.
 - Confirmation that `changetwin.com` was purchased, not merely available.
 - Trademark/legal clearance result.
 - Chosen production cloud and region.
@@ -795,8 +790,8 @@ customer.subscription.deleted
 
 ### P0 — activation and security
 
-- Resolve the repository visibility conflict and complete full-history secret
-  scanning.
+- Complete full-history secret scanning and enable GitHub repository security
+  controls.
 - Activate Supabase/SMTP, hosted PostgreSQL/API, and Stripe in production.
 - Run production tenant-isolation, billing, restore, egress, and adversarial
   tests.
@@ -972,8 +967,8 @@ Also verify:
 1. Read this document.
 2. Read `AGENTS.md`; it contains binding repository rules.
 3. Check `git status` and preserve all pre-existing user work.
-4. Confirm the current milestone and repository visibility before changing
-   release-sensitive files.
+4. Treat the repository as public and keep secrets or customer data out of
+   every file, commit, issue, and build log.
 5. Work on the highest-priority unfinished item only.
 6. Prefer the existing architecture and dependencies; do not create speculative
    services or abstractions.
@@ -993,7 +988,7 @@ Also verify:
 The most valuable next session is production activation, not more speculative
 UI or architecture:
 
-1. resolve GitHub visibility;
+1. enable GitHub security controls and run a full-history secret scan;
 2. create Supabase and apply both SQL files;
 3. deploy the control plane and run `scripts/hosted-demo.sh`;
 4. connect Vercel to Supabase/control-plane values;
@@ -1011,7 +1006,7 @@ not build additional speculative surfaces.
 
 The product is ready for a controlled design-partner pilot when:
 
-- the repository/IP boundary is resolved;
+- public-repository security controls and history review are complete;
 - Supabase authentication, RLS, SMTP, and invitations work;
 - the hosted control plane and PostgreSQL are monitored and backed up;
 - Stripe sandbox lifecycle passes;

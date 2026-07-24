@@ -74,6 +74,7 @@ touches those areas.
   `Continuity` until `BRAND_GATE.md` says `Status: cleared`.
 - Do not rename interfaces, repositories, packages, deployments, or domains
   before that gate.
-- Never change this private repository to public.
-- The future public repository must be created from the explicit allowlist in
-  `scripts/export-open-core.sh` with fresh Git history.
+- This repository is public by explicit founder decision. Never commit
+  credentials, customer data, private keys, or production configuration.
+- If a separate package-focused public repository is created, build it from the
+  explicit allowlist in `scripts/export-open-core.sh` with fresh Git history.

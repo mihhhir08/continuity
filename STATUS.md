@@ -47,10 +47,11 @@ The ChangeTwin rename and public open-core launch are additionally blocked on
 domain purchase and trademark clearance. The manual configuration list is
 recorded below, in `BRAND_GATE.md`, and in `HANDOFF.md`.
 
-GitHub reported `mihhhir08/continuity` as public on 2026-07-24, contrary to the
-locked private-monorepo release plan. The founder must confirm whether this was
-intentional. Restore it to private or complete a full history, secret, legal,
-and intellectual-property review before treating the public state as approved.
+The founder intentionally made `mihhhir08/continuity` public and explicitly
+approved publishing the complete handoff, including internal strategy and
+architecture, on 2026-07-24. Public visibility is no longer a blocker. A
+dedicated full-history secret scan and GitHub repository security controls are
+still required.
 
 ## Next task
 
@@ -77,7 +78,8 @@ Validated on 2026-07-23:
 - Secret-pattern scan found no credential material.
 - The four product surfaces and CI integration distinction agree across the
   PRD, roadmap, decision log, and agent instructions.
-- GitHub reports the repository as private with `main` as its default branch.
+- GitHub originally reported the repository as private with `main` as its
+  default branch; on 2026-07-24 the founder intentionally changed it to public.
 - All eight approved implementation issues exist.
 - The marketing site production build succeeds.
 - Enterprise cards contain no numeric price.
@@ -158,3 +160,6 @@ Validated on 2026-07-23:
   implemented architecture, production state, founder runbook, remaining
   engineering, validation commands, release gates, and Claude Code continuation
   workflow into one standalone document.
+- The complete handoff was published to public `main` in commit `0b9eed0` after
+  the founder explicitly approved exposing its internal strategy and
+  architecture.

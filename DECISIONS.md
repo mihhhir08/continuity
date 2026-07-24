@@ -160,3 +160,12 @@ Plan limits are enforced at the PostgreSQL trust boundary for projects,
 simulations, and verified repairs. Initial limits are configuration data in
 `plan_limits`, not public performance claims, and can be revised from measured
 usage.
+
+### D-026 — Public monorepo
+
+The founder intentionally made `mihhhir08/continuity` public and explicitly
+approved publishing the complete handoff, including internal strategy and
+architecture, on 2026-07-24. This supersedes the private-monorepo assumption in
+D-019 for the current repository. A separate fresh-history open-core repository
+is optional, but remains the required method if a smaller package-focused
+repository is created.
