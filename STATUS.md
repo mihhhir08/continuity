@@ -1,6 +1,6 @@
 # Status
 
-Last updated: 2026-07-23
+Last updated: 2026-07-24
 
 ## Active milestone
 
@@ -46,6 +46,11 @@ stored in Git. The public Cal.com booking URL is deployment configuration.
 The ChangeTwin rename and public open-core launch are additionally blocked on
 domain purchase and trademark clearance. The manual configuration list is
 recorded below, in `BRAND_GATE.md`, and in `HANDOFF.md`.
+
+GitHub reported `mihhhir08/continuity` as public on 2026-07-24, contrary to the
+locked private-monorepo release plan. The founder must confirm whether this was
+intentional. Restore it to private or complete a full history, secret, legal,
+and intellectual-property review before treating the public state as approved.
 
 ## Next task
 
@@ -149,3 +154,7 @@ Validated on 2026-07-23:
   simulations, approvals, and attestations through the same Supabase
   authorization boundary. Public third-party access remains gated on external
   resource-bound OAuth configuration.
+- `HANDOFF.md` consolidated the complete product thesis, business model,
+  implemented architecture, production state, founder runbook, remaining
+  engineering, validation commands, release gates, and Claude Code continuation
+  workflow into one standalone document.
