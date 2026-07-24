@@ -100,7 +100,7 @@ Validated on 2026-07-23:
   platform tests, and the implemented ChangeBench case pass.
 - The open-core exporter passes shell validation and correctly refuses to
   export while the brand gate is pending.
-- GitHub `main`, Vercel, and private Sites version 4 contain the redesign;
+- GitHub `main`, Vercel, and private Sites version 5 contain the redesign;
   both production endpoints returned HTTP 200 with the new Compatibility
   Graph content.
 - Hero and pricing CTAs have explicit destinations, Cal.com has an external
