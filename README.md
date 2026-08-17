@@ -310,9 +310,10 @@ and [BRAND_GATE.md](BRAND_GATE.md) before any rename or public release.
 APIs, MCP resources, and evidence formats require stable aliases if the brand
 changes.
 
-The repository remains private while the open-core boundary and public license
-receive final review. Do not treat this repository as a released open-source
-package yet.
+The source is publicly visible for evaluation and development transparency, but
+it is not yet an open-source release. No license has been granted while the
+open-core boundary and public license receive final review. Do not treat this
+repository as a released package yet.
 
 ---
 
